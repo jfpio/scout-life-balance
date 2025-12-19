@@ -42,8 +42,16 @@ const Home: React.FC = () => {
         </Button>
       </div>
       
-      <div className="text-xs text-gray-400 absolute bottom-4">
-        Wersja 0.1.0 MVP
+      <div className="flex flex-col items-center gap-1 absolute bottom-4 w-full px-4 text-center">
+        <p className="text-xs text-gray-400 font-medium">
+          Twórca: phm. Jan Piotrowski HR
+        </p>
+        <p className="text-[10px] text-gray-400">
+          Chcesz pomóc dopracować grę? Pisz: <a href="mailto:jpiotrowski@zhr.pl" className="underline hover:text-gray-600 transition-colors">jpiotrowski@zhr.pl</a>
+        </p>
+        <p className="text-[10px] text-gray-300 mt-1">
+          Wersja 0.2.0 MVP
+        </p>
       </div>
     </div>
   );

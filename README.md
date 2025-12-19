@@ -1,73 +1,83 @@
-# React + TypeScript + Vite
+# Scout Life Balance v2 ⛺⚖️
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A game about finding life balance, created for scouts (and not only). Make decisions, manage resources, and try not to go crazy!
 
-Currently, two official plugins are available:
+**Play online:** [https://scout-life-balance.web.app/](https://scout-life-balance.web.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📂 Project Structure
 
-## React Compiler
+The most important file for you is:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+👉 **`src/data/cards.json`** - **CARDS ARE HERE!**
+All situations, dilemmas, and their consequences are defined in this file. You can edit it to change the game content.
 
-## Expanding the ESLint configuration
+Other important files:
+*   `src/store/gameSlice.ts` - Game logic (rules, score calculation).
+*   `src/pages/Game.tsx` - Main game screen layout.
+*   `scripts/simulate-balance.ts` - Tool to check if the game is too hard/too easy.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🛠️ How to edit cards?
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Open `src/data/cards.json`. Each card looks like this:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
+```json
+{
+  "id": 101,
+  "image": "🌧️",  // Emoji or image URL
+  "description": "Situation description...",
+  "leftChoice": {
+    "text": "Swipe Left Decision",
+    "effects": {
+      "family": -2,   // Lose 2 Family points (Scale -3 to 3)
+      "energy": -2,
+      "scouting": 2,  // Gain 2 Scouting points
+      "school": 0
+    }
   },
-])
+  "rightChoice": {
+    "text": "Swipe Right Decision",
+    "effects": { ... }
+  }
+}
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+**Resources:**
+*   `family`
+*   `scouting`
+*   `school`
+*   `energy`
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+**Effect Scale:**
+We use a **-3 to 3** scale, where:
+*   1 / -1 : Small impact
+*   2 / -2 : Medium impact
+*   3 / -3 : Large impact (Crisis)
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
+
+## 🚀 How to run?
+
+1.  **Install dependencies** (first time only):
+    ```bash
+    npm install
+    ```
+
+2.  **Run game** (dev mode):
+    ```bash
+    npm run dev
+    ```
+    Click the link shown in terminal (usually `http://localhost:5173`).
+
+---
+
+## ⚖️ Game Balancing (Simulation)
+
+If you want to check fair win rates, run the Monte Carlo simulation:
+
+```bash
+npx tsx scripts/simulate-balance.ts
 ```
+
+This script runs thousands of test games and reports win rates.
