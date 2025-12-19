@@ -121,7 +121,7 @@
     "leftChoice": {
       "text": "Uczę się cały tydzień bez wychodzenia z domu",
       "effects": {
-        "family": -2,
+        "family": -3,
         "energy": -2,
         "scouting": 0,
         "school": 2
@@ -155,7 +155,7 @@
       "effects": {
         "family": 2,
         "energy": 0,
-        "scouting": -2,
+        "scouting": -3,
         "school": 0
       }
     }
@@ -399,7 +399,7 @@
       "effects": {
         "family": -1,
         "energy": -2,
-        "scouting": -2,
+        "scouting": -3,
         "school": 2
       }
     },
@@ -468,7 +468,7 @@
       "effects": {
         "family": 1,
         "energy": 0,
-        "scouting": -2,
+        "scouting": -3,
         "school": 1
       }
     },
@@ -524,6 +524,167 @@
         "family": 0,
         "energy": -1,
         "scouting": 1,
+        "school": 0
+      }
+    }
+  },
+  {
+    "id": 101,
+    "image": "🌧️",
+    "description": "Ulewa zalała wasz magazyn. Aby sprzęt obozowy się nie zniszczył, musisz działać natychmiast!",
+    "leftChoice": {
+      "text": "Organizuję drużynę i suszymy",
+      "effects": {
+        "family": -2,
+        "energy": -3,
+        "scouting": 1,
+        "school": -1
+      }
+    },
+    "rightChoice": {
+      "text": "Ignoruję to, nie mam teraz czasu",
+      "effects": {
+        "family": 0,
+        "energy": 0,
+        "scouting": -3,
+        "school": 0
+      }
+    }
+  },
+  {
+    "id": 102,
+    "image": "🤒",
+    "description": "Rozchorowałeś się tuż przed ważnym wyjazdem kadry.",
+    "leftChoice": {
+      "text": "Jadę mimo choroby, nie zostawię ich",
+      "effects": {
+        "family": -1,
+        "energy": -3,
+        "scouting": 1,
+        "school": 0
+      }
+    },
+    "rightChoice": {
+      "text": "Zostaję w łóżku",
+      "effects": {
+        "family": 1,
+        "energy": 2,
+        "scouting": -3,
+        "school": 0
+      }
+    }
+  },
+  {
+    "id": 103,
+    "image": "📉",
+    "description": "Twoje oceny drastycznie spadły. Grozi ci zagrożenie.",
+    "leftChoice": {
+      "text": "Rzucam wszystko i zakuwam do poprawki",
+      "effects": {
+        "family": 1,
+        "energy": -2,
+        "scouting": -3,
+        "school": 3
+      }
+    },
+    "rightChoice": {
+      "text": "Próbuję to jakoś połączyć (ryzykowne)",
+      "effects": {
+        "family": -2,
+        "energy": -2,
+        "scouting": -1,
+        "school": 1
+      }
+    }
+  },
+  {
+    "id": 104,
+    "image": "💔",
+    "description": "Twoja dziewczyna/chłopak ma dość, że ciągle nie masz czasu.",
+    "leftChoice": {
+      "text": "Wybieram ratowanie związku",
+      "effects": {
+        "family": 3,
+        "energy": 0,
+        "scouting": -2,
+        "school": -1
+      }
+    },
+    "rightChoice": {
+      "text": "Harcerstwo jest moją miłością",
+      "effects": {
+        "family": -3,
+        "energy": -1,
+        "scouting": 2,
+        "school": 0
+      }
+    }
+  },
+  {
+    "id": 105,
+    "image": "🔥",
+    "description": "Konflikt w kadrze! Dwie osoby chcą odejść, jeśli nie rozwiążesz sporu.",
+    "leftChoice": {
+      "text": "Organizuję mediacje (zajmie to cały weekend)",
+      "effects": {
+        "family": -2,
+        "energy": -2,
+        "scouting": 2,
+        "school": -2
+      }
+    },
+    "rightChoice": {
+      "text": "Niech odchodzą, poradzę sobie sam",
+      "effects": {
+        "family": 0,
+        "energy": -3,
+        "scouting": -3,
+        "school": 0
+      }
+    }
+  },
+  {
+    "id": 106,
+    "image": "🧟",
+    "description": "Jesteś skrajnie przemęczony, zasypiasz na lekcjach i zbiórkach.",
+    "leftChoice": {
+      "text": "Biorę urlop od harcerstwa na miesiąc",
+      "effects": {
+        "family": 1,
+        "energy": 3,
+        "scouting": -3,
+        "school": 0
+      }
+    },
+    "rightChoice": {
+      "text": "Piję kolejną kawę i cisnę dalej",
+      "effects": {
+        "family": -1,
+        "energy": -2,
+        "scouting": 1,
+        "school": -1
+      }
+    }
+  },
+  {
+    "id": 107,
+    "image": "🏚️",
+    "description": "Harcówka wymaga generalnego remontu, wspólnota grozi wam wyrzuceniem.",
+    "leftChoice": {
+      "text": "Robimy remont własnymi siłami (ciężka praca)",
+      "effects": {
+        "family": -1,
+        "energy": -3,
+        "scouting": 2,
+        "school": -1
+      }
+    },
+    "rightChoice": {
+      "text": "Rezygnujemy z harcówki",
+      "effects": {
+        "family": 0,
+        "energy": -1,
+        "scouting": -3,
         "school": 0
       }
     }

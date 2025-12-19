@@ -21,7 +21,6 @@ export const ResourceBar: React.FC<ResourceBarProps> = ({
 }) => {
   // Determine if we should show a preview indicator
   const isPreview = previewChange !== 0;
-  const previewValue = Math.max(0, Math.min(100, value + previewChange));
   const isPositive = previewChange > 0;
   
   return (
@@ -42,28 +41,24 @@ export const ResourceBar: React.FC<ResourceBarProps> = ({
           transition={{ type: "spring", stiffness: 100, damping: 20 }}
         />
         
-        {/* Preview Bar (if changing) */}
-        {isPreview && (
-          <motion.div 
-            className={`h-full absolute left-0 top-0 z-20 ${isPositive ? 'bg-green-400' : 'bg-red-400'} opacity-70`}
-            initial={{ width: `${value}%` }}
-            animate={{ width: `${previewValue}%` }}
-            transition={{ duration: 0.2 }}
-          />
-        )}
+        {/* Preview Indicator (Overlay Tint) - instead of exact width, just tint the whole bar or show a small glimmer? 
+            User said: "widział na zielono/czerwono czy karta daje plus czy minus".
+            Let's just use the icon indicator below and maybe a subtle border or icon change.
+            Actually, let's remove the width preview entirely to be safe about "exact points".
+        */}
       </div>
       
       {/* Change Indicator */}
-      <div className="h-4 relative">
+      <div className="h-4 relative flex justify-end">
         <AnimatePresence>
           {isPreview && (
             <motion.div 
               initial={{ opacity: 0, y: 5 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 5 }}
-              className={`text-xs font-bold absolute right-0 ${isPositive ? 'text-green-600' : 'text-red-500'}`}
+              className={`text-lg font-bold absolute -top-1 ${isPositive ? 'text-green-500' : 'text-red-500'}`}
             >
-              {isPositive ? '+' : ''}{previewChange}
+              {(isPositive ? '▲' : '▼').repeat(Math.min(3, Math.abs(previewChange)))}
             </motion.div>
           )}
         </AnimatePresence>

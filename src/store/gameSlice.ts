@@ -11,6 +11,8 @@ const initialResources: Resources = {
   energy: 50,
 };
 
+const DIFFICULTY_SCALE = 8;
+
 const initialState: GameState = {
   resources: initialResources,
   deck: initialDeck,
@@ -46,7 +48,8 @@ const gameSlice = createSlice({
       Object.entries(effects).forEach(([resource, value]) => {
           const key = resource as keyof Resources;
           if (state.resources[key] !== undefined && typeof value === 'number') {
-               state.resources[key] = Math.max(0, Math.min(100, state.resources[key] + value));
+               const scaledValue = value * DIFFICULTY_SCALE;
+               state.resources[key] = Math.max(0, Math.min(100, state.resources[key] + scaledValue));
           }
       });
 

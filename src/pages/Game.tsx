@@ -141,7 +141,11 @@ const Game: React.FC = () => {
                <h2 className="text-3xl font-bold text-gray-900">Koniec Gry</h2>
                <div className="inline-block bg-gray-100 px-4 py-1 rounded-full">
                   <p className="text-sm font-semibold text-gray-600">
-                    Przetrwałeś {weeksSurvived} {weeksSurvived === 1 ? 'tydzień' : 'tygodni'}
+                    Przetrwałeś {weeksSurvived} {
+                    weeksSurvived === 1 ? 'tydzień' :
+                    (weeksSurvived % 10 >= 2 && weeksSurvived % 10 <= 4 && (weeksSurvived % 100 < 10 || weeksSurvived % 100 >= 20)) ? 'tygodnie' :
+                    'tygodni'
+                  }
                   </p>
                </div>
              </div>
