@@ -5,43 +5,11 @@ import { Heart, Users, Book, Zap, ArrowLeft, RotateCcw } from 'lucide-react';
 import type { RootState } from '../store/store';
 import { ResourceBar } from '../components/ResourceBar';
 import { Button } from '../components/Button';
-import { startGame, resetGame, applyCardEffect } from '../store/gameSlice';
-import type { Card } from '../types/game';
+import { startGame, resetGame, applyCardEffect, continueGame } from '../store/gameSlice';
 import { SwipeCard } from '../components/SwipeCard';
 
 // Temporary mock deck
-const MOCK_DECK: Card[] = [
-  {
-    id: '1',
-    text: 'Masz ważny sprawdzian jutro, ale drużyna potrzebuje pomocy przy zbiórce.',
-    leftChoice: 'Uczę się',
-    rightChoice: 'Pomagam drużynie',
-    leftEffects: [
-      { resource: 'school', value: 10 },
-      { resource: 'team', value: -10 },
-      { resource: 'energy', value: -5 }
-    ],
-    rightEffects: [
-      { resource: 'school', value: -15 },
-      { resource: 'team', value: 10 },
-      { resource: 'family', value: 5 }
-    ]
-  },
-  {
-    id: '2',
-    text: 'Rodzina zaprasza na obiad, ale jesteś zmęczony po biwaku.',
-    leftChoice: 'Idę na obiad',
-    rightChoice: 'Odpoczywam',
-    leftEffects: [
-      { resource: 'family', value: 10 },
-      { resource: 'energy', value: -10 }
-    ],
-    rightEffects: [
-      { resource: 'family', value: -10 },
-      { resource: 'energy', value: 15 }
-    ]
-  }
-];
+
 
 const Game: React.FC = () => {
   const dispatch = useDispatch();
@@ -53,12 +21,12 @@ const Game: React.FC = () => {
   
   useEffect(() => {
     if (gameMode === 'idle') {
-      dispatch(startGame(MOCK_DECK));
+      dispatch(startGame([])); // Empty array triggers default deck in reducer
     }
   }, [dispatch, gameMode]);
 
   const handleRestart = () => {
-    dispatch(startGame(MOCK_DECK));
+    dispatch(startGame([]));
   };
 
   const handleExit = () => {
@@ -82,9 +50,9 @@ const Game: React.FC = () => {
      if (!currentCard || Math.abs(dragOffset) < 20) return 0;
      
      const isRight = dragOffset > 0;
-     const effects = isRight ? currentCard.rightEffects : currentCard.leftEffects;
-     const effect = effects.find(e => e.resource === resourceKey);
-     return effect ? effect.value : 0;
+     const choice = isRight ? currentCard.rightChoice : currentCard.leftChoice;
+     const effects = choice.effects;
+     return effects[resourceKey] || 0;
   };
 
   return (
@@ -142,10 +110,10 @@ const Game: React.FC = () => {
           />
           <ResourceBar 
             icon={Users} 
-            value={resources.team} 
+            value={resources.scouting} 
             color="bg-blue-500" 
             label="Drużyna" 
-            previewChange={isGameOver ? 0 : getResourcePreview('team')}
+            previewChange={isGameOver ? 0 : getResourcePreview('scouting')}
           />
           <ResourceBar 
             icon={Book} 
@@ -182,6 +150,23 @@ const Game: React.FC = () => {
                <p className="text-gray-800 font-medium leading-relaxed">
                  {gameOverReason}
                </p>
+             </div>
+
+             {/* Secret Password Field */}
+             <div className="pt-2">
+                <p className="text-xs text-center text-gray-400 mb-1 uppercase tracking-wider font-bold">Tajne hasło</p>
+                <div className="relative">
+                  <input 
+                    type="password" 
+                    placeholder="Wpisz hasło..." 
+                    className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-2 text-center text-gray-700 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all placeholder:text-gray-400"
+                    onChange={(e) => {
+                      if (e.target.value.toLowerCase() === 'wsparcie') {
+                        dispatch(continueGame());
+                      }
+                    }}
+                  />
+                </div>
              </div>
 
              <div className="space-y-3 pt-2">

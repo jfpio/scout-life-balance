@@ -118,22 +118,26 @@ export const SwipeCard: React.FC<SwipeCardProps> = ({
       {/* Choice Indicators (Overlay) */}
       <motion.div 
         style={{ opacity: rightOpacity }} 
-        className="absolute top-8 left-8 border-4 border-blue-500 text-blue-500 rounded-lg px-4 py-2 font-bold text-2xl transform -rotate-12 z-20 pointer-events-none bg-white/80 backdrop-blur-sm"
+        className="absolute top-8 left-8 border-4 border-indigo-500 text-indigo-600 rounded-lg px-4 py-2 font-bold text-2xl transform -rotate-12 z-20 pointer-events-none bg-white/90 backdrop-blur-sm"
       >
-        {card.rightChoice}
+        {card.rightChoice.text}
       </motion.div>
       <motion.div 
         style={{ opacity: leftOpacity }} 
-        className="absolute top-8 right-8 border-4 border-blue-500 text-blue-500 rounded-lg px-4 py-2 font-bold text-2xl transform rotate-12 z-20 pointer-events-none bg-white/80 backdrop-blur-sm"
+        className="absolute top-8 right-8 border-4 border-amber-500 text-amber-600 rounded-lg px-4 py-2 font-bold text-2xl transform rotate-12 z-20 pointer-events-none bg-white/90 backdrop-blur-sm"
       >
-        {card.leftChoice}
+        {card.leftChoice.text}
       </motion.div>
 
       {/* Card Content */}
       <div className="w-full flex-1 flex flex-col items-center justify-center gap-6">
         {card.image && (
-            <div className="w-full h-40 bg-gray-100 rounded-xl mb-2 overflow-hidden">
-                <img src={card.image} alt="Situation" className="w-full h-full object-cover" />
+            <div className={`w-full ${card.image.length < 5 ? 'h-32 flex items-center justify-center bg-indigo-50' : 'h-40 bg-gray-100'} rounded-xl mb-2 overflow-hidden`}>
+                {card.image.length < 5 ? (
+                    <span className="text-6xl">{card.image}</span>
+                ) : (
+                    <img src={card.image} alt="Situation" className="w-full h-full object-cover" />
+                )}
             </div>
         )}
         
@@ -145,7 +149,7 @@ export const SwipeCard: React.FC<SwipeCardProps> = ({
         )}
 
         <h3 className="text-xl font-medium text-center text-gray-800 leading-relaxed">
-          {card.text}
+          {card.description}
         </h3>
       </div>
     </motion.div>

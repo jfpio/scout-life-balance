@@ -1,25 +1,23 @@
 export interface Resources {
   family: number;
-  team: number;
+  scouting: number;
   school: number;
   energy: number;
 }
 
 export type ResourceType = keyof Resources;
 
-export interface CardEffect {
-  resource: ResourceType;
-  value: number;
+export interface Choice {
+  text: string;
+  effects: Partial<Resources>;
 }
 
 export interface Card {
-  id: string;
-  text: string;
-  image?: string; // Optional image URL
-  leftChoice: string;
-  rightChoice: string;
-  leftEffects: CardEffect[];
-  rightEffects: CardEffect[];
+  id: number;
+  description: string;
+  image?: string;
+  leftChoice: Choice;
+  rightChoice: Choice;
 }
 
 export interface GameState {
@@ -27,7 +25,7 @@ export interface GameState {
   deck: Card[];
   currentCardIndex: number;
   isGameOver: boolean;
-  weeksSurvived: number; // Each card can represent a day/week, plan says week count as score
+  weeksSurvived: number;
   gameOverReason?: string;
-  gameMode: 'idle' | 'playing' | 'gameover'; // Added simple state machine
+  gameMode: 'idle' | 'playing' | 'gameover';
 }

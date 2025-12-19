@@ -1,0 +1,531 @@
+[
+  {
+    "id": 1,
+    "image": "⛺",
+    "description": "W następny weekend organizowany jest biwak ZZetów. Jedziemy w góry i będzie super, ale z drugiej strony mam w poniedziałek po test i powinienem się uczyć.",
+    "leftChoice": {
+      "text": "Jadę na biwak",
+      "effects": {
+        "family": 1,
+        "energy": 1,
+        "scouting": 2,
+        "school": -1
+      }
+    },
+    "rightChoice": {
+      "text": "Zostaję i się uczę",
+      "effects": {
+        "family": 0,
+        "energy": 0,
+        "scouting": -1,
+        "school": 2
+      }
+    }
+  },
+  {
+    "id": 2,
+    "image": "😰",
+    "description": "Jutro masz test i jeszcze nic do niego nie zrobiłeś",
+    "leftChoice": {
+      "text": "Uczę się całą noc",
+      "effects": {
+        "family": 0,
+        "energy": -2,
+        "scouting": 0,
+        "school": 1
+      }
+    },
+    "rightChoice": {
+      "text": "Uczę się do wyznaczonej godziny i jak będzie to będzie",
+      "effects": {
+        "family": 0,
+        "energy": 1,
+        "scouting": 0,
+        "school": -1
+      }
+    }
+  },
+  {
+    "id": 3,
+    "image": "🎸",
+    "description": "W weekend jest koncert ulubionego zespołu",
+    "leftChoice": {
+      "text": "Super! Idę!",
+      "effects": {
+        "family": 2,
+        "energy": 0,
+        "scouting": 0,
+        "school": 0
+      }
+    },
+    "rightChoice": {
+      "text": "Lepiej nie...",
+      "effects": {
+        "family": -1,
+        "energy": 1,
+        "scouting": 0,
+        "school": 0
+      }
+    }
+  },
+  {
+    "id": 4,
+    "image": "⏳",
+    "description": "Drużynowy każe pisać plan pracy, bo zostały 3 dni do terminu oddania",
+    "leftChoice": {
+      "text": "Siedzę i piszę",
+      "effects": {
+        "family": -1,
+        "energy": -1,
+        "scouting": 2,
+        "school": -1
+      }
+    },
+    "rightChoice": {
+      "text": "Dzień w tą czy wewtą nie zrobi różnicy",
+      "effects": {
+        "family": -1,
+        "energy": -1,
+        "scouting": 0,
+        "school": -1
+      }
+    }
+  },
+  {
+    "id": 5,
+    "image": "🌤️",
+    "description": "Masz wolne popołudnie, co robisz?",
+    "leftChoice": {
+      "text": "Siadam do nauki i porobię też harcerstwo",
+      "effects": {
+        "family": 0,
+        "energy": 0,
+        "scouting": 1,
+        "school": 1
+      }
+    },
+    "rightChoice": {
+      "text": "Wychodzę z przyjaciółmi",
+      "effects": {
+        "family": 1,
+        "energy": 1,
+        "scouting": 0,
+        "school": 0
+      }
+    }
+  },
+  {
+    "id": 6,
+    "image": "📚",
+    "description": "Okres sprawdzianów/egzaminów",
+    "leftChoice": {
+      "text": "Uczę się cały tydzień bez wychodzenia z domu",
+      "effects": {
+        "family": -2,
+        "energy": -2,
+        "scouting": 0,
+        "school": 2
+      }
+    },
+    "rightChoice": {
+      "text": "Pouczę się, ale muszę mieć też czas na odpoczynek!",
+      "effects": {
+        "family": -1,
+        "energy": 0,
+        "scouting": 0,
+        "school": 1
+      }
+    }
+  },
+  {
+    "id": 7,
+    "image": "🔥",
+    "description": "W sobotę masz zbiórkę drużyny, a twoi rodzice zaproponowali wspólny weekendowy wyjazd.",
+    "leftChoice": {
+      "text": "Idę i pomagam na zbiórce drużyny",
+      "effects": {
+        "family": -1,
+        "energy": 0,
+        "scouting": 2,
+        "school": 0
+      }
+    },
+    "rightChoice": {
+      "text": "Rodzina jest ważniejsza",
+      "effects": {
+        "family": 2,
+        "energy": 0,
+        "scouting": -2,
+        "school": 0
+      }
+    }
+  },
+  {
+    "id": 8,
+    "image": "👥",
+    "description": "Dostajesz propozycję wspólnej nauki ze znajomymi.",
+    "leftChoice": {
+      "text": "Umawiam się, dobrze ich będzie zobaczyć i dodatkowo się pouczymy.",
+      "effects": {
+        "family": 1,
+        "energy": 0,
+        "scouting": 0,
+        "school": 2
+      }
+    },
+    "rightChoice": {
+      "text": "Cisnę sam.",
+      "effects": {
+        "family": -1,
+        "energy": -1,
+        "scouting": 0,
+        "school": 3
+      }
+    }
+  },
+  {
+    "id": 9,
+    "image": "🤧",
+    "description": "Dostałeś kataru.",
+    "leftChoice": {
+      "text": "Idę do szkoły/na uczelnię!",
+      "effects": {
+        "family": 0,
+        "energy": -2,
+        "scouting": 0,
+        "school": 0
+      }
+    },
+    "rightChoice": {
+      "text": "Zostaję w domu, by odpocząć",
+      "effects": {
+        "family": 0,
+        "energy": 0,
+        "scouting": 0,
+        "school": -1
+      }
+    }
+  },
+  {
+    "id": 10,
+    "image": "🎬",
+    "description": "Wyszedł nowy sezon nowego, świetnego serialu na netflixie.",
+    "leftChoice": {
+      "text": "Oglądaj całą noc",
+      "effects": {
+        "family": 2,
+        "energy": -2,
+        "scouting": 0,
+        "school": -1
+      }
+    },
+    "rightChoice": {
+      "text": "Obejrzę tylko jeden odcinek (serio)",
+      "effects": {
+        "family": 1,
+        "energy": 1,
+        "scouting": 0,
+        "school": 0
+      }
+    }
+  },
+  {
+    "id": 11,
+    "image": "🎉",
+    "description": "W piątek impreza Twojego dobrego przyjaciela, a w sobotę o 10 zbiórka drużyny.",
+    "leftChoice": {
+      "text": "Wyjdę wcześniej i będę bardziej wyspany",
+      "effects": {
+        "family": 1,
+        "energy": 1,
+        "scouting": 2,
+        "school": 0
+      }
+    },
+    "rightChoice": {
+      "text": "Imprezuję całą noc i niewyspany przychodzę na zbiórkę.",
+      "effects": {
+        "family": 2,
+        "energy": -2,
+        "scouting": 1,
+        "school": 0
+      }
+    }
+  },
+  {
+    "id": 12,
+    "image": "⛵",
+    "description": "W wakacje pokrywa ci się kurs harcerski oraz wyjazd ze znajomymi na mazurach",
+    "leftChoice": {
+      "text": "Jadę ze znajomymi",
+      "effects": {
+        "family": 2,
+        "energy": 1,
+        "scouting": 0,
+        "school": 0
+      }
+    },
+    "rightChoice": {
+      "text": "Wybieram kurs harcerski",
+      "effects": {
+        "family": 1,
+        "energy": 1,
+        "scouting": 3,
+        "school": 0
+      }
+    }
+  },
+  {
+    "id": 13,
+    "image": "🤯",
+    "description": "Niestety wziąłeś na siebie za dużo i wszystko zaczyna się walić",
+    "leftChoice": {
+      "text": "Yyyy",
+      "effects": {
+        "family": -1,
+        "energy": -1,
+        "scouting": -1,
+        "school": -1
+      }
+    },
+    "rightChoice": {
+      "text": "Cooo?",
+      "effects": {
+        "family": -1,
+        "energy": -1,
+        "scouting": -1,
+        "school": -1
+      }
+    }
+  },
+  {
+    "id": 14,
+    "image": "🆘",
+    "description": "Za chwilę matura albo sesja, a ty zorientowałeś się, że nie uczyłeś się regularnie i w sumie to nie jest kolorowo.",
+    "leftChoice": {
+      "text": "Ups",
+      "effects": {
+        "family": -1,
+        "energy": -1,
+        "scouting": -1,
+        "school": -2
+      }
+    },
+    "rightChoice": {
+      "text": "Dlaczego?",
+      "effects": {
+        "family": -1,
+        "energy": -1,
+        "scouting": -1,
+        "school": -2
+      }
+    }
+  },
+  {
+    "id": 15,
+    "image": "💡",
+    "description": "Razem z kadrą miałeś super flow na wymyślanie harcerskich akcji!",
+    "leftChoice": {
+      "text": "Juhu!",
+      "effects": {
+        "family": 1,
+        "energy": 1,
+        "scouting": 2,
+        "school": 0
+      }
+    },
+    "rightChoice": {
+      "text": "Sztos!",
+      "effects": {
+        "family": 1,
+        "energy": 1,
+        "scouting": 2,
+        "school": 0
+      }
+    }
+  },
+  {
+    "id": 17,
+    "image": "🧩",
+    "description": "Masz bardzo problematyczną harcerkę/zuchenkę/wędrowniczkę w drużynie",
+    "leftChoice": {
+      "text": "Starasz się z nią porozmawiać o jej problemach i rozwiązać trudną sytuację",
+      "effects": {
+        "family": 0,
+        "energy": -1,
+        "scouting": 2,
+        "school": 0
+      }
+    },
+    "rightChoice": {
+      "text": "Zostawiasz temat - nie robisz nic i masz nadzieję, że rozwiąże się samo",
+      "effects": {
+        "family": 0,
+        "energy": -2,
+        "scouting": -1,
+        "school": 0
+      }
+    }
+  },
+  {
+    "id": 18,
+    "image": "🏔️",
+    "description": "Planujesz biwak, masz do wyboru zrobić super epicki biwak w długi weekend, albo wykorzystać jeden ze standardowych weekendów",
+    "leftChoice": {
+      "text": "Jadę w standardowy weekend, w długi weekend wyjadę ze znajomymi albo poleżę do góry brzuchem",
+      "effects": {
+        "family": 2,
+        "energy": 1,
+        "scouting": 1,
+        "school": 0
+      }
+    },
+    "rightChoice": {
+      "text": "Jadę w długi weekend, ale to będzie czaderska wyprawa!! W normalny weekend będę robić to, co zwykle",
+      "effects": {
+        "family": 1,
+        "energy": 0,
+        "scouting": 2,
+        "school": 0
+      }
+    }
+  },
+  {
+    "id": 19,
+    "image": "🏫",
+    "description": "Nie zdajesz roku na studiach/w szkole/zaraz piszesz maturę i rozpada ci się drużyna ",
+    "leftChoice": {
+      "text": "Odcinasz się od harcerstwa - co będzie to będzie; studia są najważniejsze",
+      "effects": {
+        "family": -1,
+        "energy": -2,
+        "scouting": -2,
+        "school": 2
+      }
+    },
+    "rightChoice": {
+      "text": "Pracujesz dalej z jednostką, próbując dalej uczyć się tyle, ile możesz - masz nadzieję, że tyle wystarczy",
+      "effects": {
+        "family": -1,
+        "energy": -2,
+        "scouting": 1,
+        "school": -2
+      }
+    }
+  },
+  {
+    "id": 20,
+    "image": "💰",
+    "description": "Organizujesz biwak. Możesz realizować dwie ścieżki programowe - mniej ambitną i tańszą lub bardziej ambitną i droższą",
+    "leftChoice": {
+      "text": "Wnioskuję o dofinansowanie a potem je rozliczam",
+      "effects": {
+        "family": 0,
+        "energy": -1,
+        "scouting": 2,
+        "school": -1
+      }
+    },
+    "rightChoice": {
+      "text": "Wybieram tańszą opcję - nie mam czasu na zabawę z finansami ",
+      "effects": {
+        "family": 0,
+        "energy": 0,
+        "scouting": 1,
+        "school": 0
+      }
+    }
+  },
+  {
+    "id": 21,
+    "image": "⚖️",
+    "description": "Masz ograniczoną ilość czasu w życiu. Musisz wybrać - albo decydujesz się na relację prywatną albo na udział w zbiórce lub akcji zarobkowej, na której drużyna bardzo potrzebuje wsparcia.",
+    "leftChoice": {
+      "text": "Nie idę na akcję drużyny - spotykam się w ramach relacji prywatnej",
+      "effects": {
+        "family": 2,
+        "energy": 0,
+        "scouting": -1,
+        "school": 0
+      }
+    },
+    "rightChoice": {
+      "text": "Idę na zbiórkę albo akcję zarobkową",
+      "effects": {
+        "family": -1,
+        "energy": 0,
+        "scouting": 2,
+        "school": 0
+      }
+    }
+  },
+  {
+    "id": 22,
+    "image": "💼",
+    "description": "Masz ograniczoną ilość czasu w życiu. Musisz wybrać - albo zostajesz drużynowym albo idziesz do pracy",
+    "leftChoice": {
+      "text": "Idę do pracy i zawalam z drużyną",
+      "effects": {
+        "family": 1,
+        "energy": 0,
+        "scouting": -2,
+        "school": 1
+      }
+    },
+    "rightChoice": {
+      "text": "Nie idę do pracy, ale moja drużyna działa na tip top!",
+      "effects": {
+        "family": 0,
+        "energy": 1,
+        "scouting": 2,
+        "school": 0
+      }
+    }
+  },
+  {
+    "id": 23,
+    "image": "⚽",
+    "description": "Nakładają Ci się treningi/zajęcia pozaszkolne ze zbiórkami harcerskimi. Co robisz?",
+    "leftChoice": {
+      "text": "Wybieram sport/zajęcia.",
+      "effects": {
+        "family": 1,
+        "energy": 1,
+        "scouting": -1,
+        "school": 1
+      }
+    },
+    "rightChoice": {
+      "text": "Wybieram harcerstwo",
+      "effects": {
+        "family": 1,
+        "energy": 0,
+        "scouting": 1,
+        "school": 0
+      }
+    }
+  },
+  {
+    "id": 24,
+    "image": "👋",
+    "description": "Do Twojej drużyny zgłasza się dużo nowych harcerek.",
+    "leftChoice": {
+      "text": "Przyjmuję je wszystkie, ale w drużynie mam dużo osób, więc jakość mojej pracy metodycznej się obniża",
+      "effects": {
+        "family": 0,
+        "energy": -1,
+        "scouting": -1,
+        "school": 0
+      }
+    },
+    "rightChoice": {
+      "text": "Przyjmuję je do określonego limitu. Reszcie muszę odmówić",
+      "effects": {
+        "family": 0,
+        "energy": -1,
+        "scouting": 1,
+        "school": 0
+      }
+    }
+  }
+]
