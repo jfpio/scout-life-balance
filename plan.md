@@ -1,20 +1,5 @@
 # Plan Projektu: scout-life-balance
 
-## Spis treści
-
-1. [Wprowadzenie](#wprowadzenie)
-2. [Cel Projektu](#cel-projektu)
-3. [Opis gry](#opis-gry)
-4. [Mechanika gry](#mechanika-gry)
-5. [Etapy Realizacji Projektu](#etapy-realizacji-projektu)
-6. [Pomysły na wersję 2.0](#pomysły-na-wersję-20)
-7. [Technologie i narzędzia](#technologie-i-narzędzia)
-8. [Przewidywany czas realizacji](#przewidywany-czas-realizacji)
-9. [Przykładowe pytania (karty)](#przykładowe-pytania-karty)
-10. [Dodatkowe uwagi](#dodatkowe-uwagi)
-
----
-
 ## Wprowadzenie
 
 **scout-life-balance** to gra edukacyjna przeznaczona głównie dla młodych instruktorów harcerskich (ale nie tylko). Ma na celu pokazanie wyzwań związanych z zarządzaniem czasem, priorytetami oraz energią życiową. Projekt jest realizowany w formie webowej aplikacji, działającej dobrze także na urządzeniach mobilnych.
@@ -120,6 +105,7 @@ Poniższe wytyczne przedstawiają wstępną wizję wyglądu oraz interakcji w ap
 
 ### Faza I
 1. Implementacja "Graj" i "Instrukcja" bez opcji Kursowej
+
 
 ## Technologie
 - React
