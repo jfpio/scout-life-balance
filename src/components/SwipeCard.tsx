@@ -113,7 +113,7 @@ export const SwipeCard: React.FC<SwipeCardProps> = ({
       onDrag={handleDrag}
       animate={controls}
       style={{ x, rotate }}
-      className="absolute w-full max-w-[320px] h-[420px] bg-white rounded-2xl shadow-xl border border-gray-100 flex flex-col items-center justify-between p-6 cursor-grab active:cursor-grabbing touch-none select-none"
+      className="absolute w-full max-w-[320px] h-full bg-white rounded-2xl shadow-xl border border-gray-100 flex flex-col items-center justify-between p-6 cursor-grab active:cursor-grabbing touch-none select-none"
     >
       {/* Choice Indicators (Overlay) */}
       <motion.div 

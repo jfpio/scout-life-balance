@@ -56,9 +56,9 @@ const Game: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col h-full bg-gray-50 relative overflow-hidden">
+    <div className="flex flex-col h-[100dvh] bg-gray-50 relative overflow-hidden">
       {/* Header */}
-      <div className="absolute top-0 w-full z-10 flex justify-between items-center p-4">
+      <div className="absolute top-0 w-full z-50 flex justify-between items-center p-4">
         <button onClick={handleExit} className="p-2 bg-white/80 backdrop-blur-sm rounded-full shadow-sm hover:bg-white transition-colors">
            <ArrowLeft size={20} className="text-gray-600" />
         </button>
@@ -68,8 +68,8 @@ const Game: React.FC = () => {
       </div>
 
       {/* Main Game Area (Card) */}
-      <div className="flex-1 flex items-center justify-center p-6 mt-8 mb-24 relative">
-         <div className="relative w-full max-w-[320px] h-[420px]">
+      <div className="flex-1 flex items-center justify-center p-4 mt-4 mb-32 relative w-full h-full max-h-[80dvh]">
+         <div className="relative w-full max-w-[360px] h-full max-h-[70dvh] min-h-[300px] aspect-[3/4]">
             {/* Background cards for stack effect */}
             <div className="absolute top-2 left-0 right-0 h-full bg-white rounded-2xl shadow-sm scale-95 opacity-50 translate-y-2" />
             <div className="absolute top-4 left-0 right-0 h-full bg-white rounded-2xl shadow-sm scale-90 opacity-30 translate-y-4" />
