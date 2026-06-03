@@ -79,6 +79,40 @@ We use a **-3 to 3** scale, where:
 
 ---
 
+## 🧩 Custom Google Sheets games
+
+The app can create a temporary custom game from a public Google Sheets template:
+
+1. Import/use the workbook template and edit the `Cards` tab.
+2. Share the spreadsheet as **anyone with the link can view**.
+3. Open `/create` and paste the spreadsheet link.
+4. Share the generated `/custom/<slug>` link or QR code.
+
+Custom games are stored in Firestore with a 14-day expiration. This Spark-compatible version does not use Cloud Functions, Secret Manager, Cloud Build, or Artifact Registry.
+
+### Frontend Firebase env vars
+
+Create local/deploy environment variables for the Firebase web app:
+
+```bash
+VITE_FIREBASE_API_KEY=...
+VITE_FIREBASE_AUTH_DOMAIN=...
+VITE_FIREBASE_PROJECT_ID=scout-life-balance
+VITE_FIREBASE_STORAGE_BUCKET=...
+VITE_FIREBASE_MESSAGING_SENDER_ID=...
+VITE_FIREBASE_APP_ID=...
+```
+
+Deploy Firestore rules and hosting:
+
+```bash
+firebase deploy --only firestore,hosting
+```
+
+Expired games are rejected by Firestore rules and by the app. Automatic background cleanup is not available without a backend; expired documents can remain stored until manually deleted or visited by tooling you add later.
+
+---
+
 ## ⚖️ Game Balancing (Simulation)
 
 If you want to check fair win rates, run the Monte Carlo simulation:

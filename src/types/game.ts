@@ -36,3 +36,13 @@ export interface StartGamePayload {
   deck: Card[];
   gameOverReasons: GameOverReasons;
 }
+
+export interface CustomGameDocument {
+  slug: string;
+  cards: Card[];
+  gameOverReasons: GameOverReasons;
+  createdAt: Date | null;
+  expiresAt: Date;
+  sourceSheetUrl: string;
+  cardCount: number;
+}

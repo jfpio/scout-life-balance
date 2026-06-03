@@ -1,8 +1,13 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../components/Button';
-import { ArrowRight, BookOpen, GraduationCap } from 'lucide-react';
-import { content } from '../i18n';
+import { ArrowRight, BookOpen, GraduationCap, QrCode } from 'lucide-react';
+import { activeLocale, content } from '../i18n';
+
+const customGameLabel = {
+  pl: 'Stwórz własną grę',
+  en: 'Create custom game',
+};
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
@@ -34,6 +39,16 @@ const Home: React.FC = () => {
 
         <Button 
           variant="secondary" 
+          fullWidth 
+          onClick={() => navigate('/create')}
+          className="flex items-center justify-center gap-2"
+        >
+          <span>{customGameLabel[activeLocale]}</span>
+          <QrCode size={20} />
+        </Button>
+
+        <Button 
+          variant="outline" 
           fullWidth 
           onClick={() => navigate('/instructions')}
           className="flex items-center justify-center gap-2"

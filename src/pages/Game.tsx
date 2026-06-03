@@ -8,28 +8,54 @@ import { Button } from '../components/Button';
 import { startGame, resetGame, applyCardEffect, continueGame } from '../store/gameSlice';
 import { SwipeCard } from '../components/SwipeCard';
 import { content } from '../i18n';
+import type { Card, GameOverReasons } from '../types/game';
 
-const Game: React.FC = () => {
+interface GameProps {
+  deck?: Card[];
+  gameOverReasons?: GameOverReasons;
+  sessionKey?: string;
+  exitPath?: string;
+}
+
+const Game: React.FC<GameProps> = ({
+  deck,
+  gameOverReasons,
+  sessionKey = 'default',
+  exitPath = '/',
+}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { resources, deck, currentCardIndex, weeksSurvived, isGameOver, gameOverReason, gameMode } = useSelector((state: RootState) => state.game);
+  const {
+    resources,
+    deck: activeDeck,
+    currentCardIndex,
+    weeksSurvived,
+    isGameOver,
+    gameOverReason,
+    gameMode,
+  } = useSelector((state: RootState) => state.game);
   
   // Local state for previewing resource changes
   const [dragOffset, setDragOffset] = React.useState(0);
+  const lastStartedSessionKey = React.useRef<string | null>(null);
+  const gameDeck = deck ?? content.deck;
+  const resolvedGameOverReasons = gameOverReasons ?? content.game.gameOverReasons;
   
   useEffect(() => {
-    if (gameMode === 'idle') {
-      dispatch(startGame({ deck: content.deck, gameOverReasons: content.game.gameOverReasons }));
+    if (gameMode === 'idle' || lastStartedSessionKey.current !== sessionKey) {
+      dispatch(startGame({ deck: gameDeck, gameOverReasons: resolvedGameOverReasons }));
+      lastStartedSessionKey.current = sessionKey;
     }
-  }, [dispatch, gameMode]);
+  }, [dispatch, gameDeck, gameMode, resolvedGameOverReasons, sessionKey]);
 
   const handleRestart = () => {
-    dispatch(startGame({ deck: content.deck, gameOverReasons: content.game.gameOverReasons }));
+    dispatch(startGame({ deck: gameDeck, gameOverReasons: resolvedGameOverReasons }));
+    lastStartedSessionKey.current = sessionKey;
   };
 
   const handleExit = () => {
     dispatch(resetGame());
-    navigate('/');
+    navigate(exitPath);
   };
 
   const handleSwipe = (direction: 'left' | 'right') => {
@@ -41,7 +67,7 @@ const Game: React.FC = () => {
     setDragOffset(offset);
   };
 
-  const currentCard = deck[currentCardIndex];
+  const currentCard = activeDeck[currentCardIndex];
 
   // Calculate previews based on drag direction
   const getResourcePreview = (resourceKey: keyof typeof resources) => {
