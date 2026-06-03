@@ -1,5 +1,18 @@
 {
   "projects": {
     "default": "scout-life-balance"
-  }
+  },
+  "targets": {
+    "scout-life-balance": {
+      "hosting": {
+        "pl": [
+          "scout-life-balance"
+        ],
+        "en": [
+          "scout-life-balance-en"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }

@@ -1,8 +1,5 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import type { GameState, Card, Resources } from '../types/game';
-import cardsData from '../data/cards.json';
-
-const initialDeck: Card[] = cardsData as Card[];
+import type { GameState, Resources, StartGamePayload, GameOverReasons } from '../types/game';
 
 const initialResources: Resources = {
   family: 50,
@@ -11,11 +8,19 @@ const initialResources: Resources = {
   energy: 50,
 };
 
+const defaultGameOverReasons: GameOverReasons = {
+  family: '',
+  scouting: '',
+  school: '',
+  energy: '',
+};
+
 const DIFFICULTY_SCALE = 8;
 
 const initialState: GameState = {
   resources: initialResources,
-  deck: initialDeck,
+  deck: [],
+  gameOverReasons: defaultGameOverReasons,
   currentCardIndex: 0,
   isGameOver: false,
   weeksSurvived: 0,
@@ -26,11 +31,10 @@ const gameSlice = createSlice({
   name: 'game',
   initialState,
   reducers: {
-    startGame: (state, action: PayloadAction<Card[]>) => {
+    startGame: (state, action: PayloadAction<StartGamePayload>) => {
       state.resources = { ...initialResources };
-      // Shuffle the deck (if provided, otherwise use default full deck)
-      const deckToUse = action.payload.length > 0 ? action.payload : initialDeck;
-      state.deck = shuffleArray([...deckToUse]);
+      state.deck = shuffleArray([...action.payload.deck]);
+      state.gameOverReasons = action.payload.gameOverReasons;
       state.currentCardIndex = 0;
       state.isGameOver = false;
       state.weeksSurvived = 0;
@@ -60,16 +64,16 @@ const gameSlice = createSlice({
       // Check if any resource hit 0
       if (state.resources.family <= 0) {
         gameOver = true;
-        reason = "Twoja rodzina i przyjaciele czują się zaniedbani. Zostałeś sam.";
+        reason = state.gameOverReasons.family;
       } else if (state.resources.scouting <= 0) {
         gameOver = true;
-        reason = "Twoja gromada lub drużyna się rozpadła.";
+        reason = state.gameOverReasons.scouting;
       } else if (state.resources.school <= 0) {
         gameOver = true;
-        reason = "Twoje wyniki w nauce spadły do zera. Musisz powtarzać rok.";
+        reason = state.gameOverReasons.school;
       } else if (state.resources.energy <= 0) {
         gameOver = true;
-        reason = "Wypaliłeś się. Brak sił witalnych uniemożliwia dalsze działanie.";
+        reason = state.gameOverReasons.energy;
       }
 
       if (gameOver) {

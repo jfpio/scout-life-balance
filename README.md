@@ -2,14 +2,21 @@
 
 A game about finding life balance, created for scouts (and not only). Make decisions, manage resources, and try not to go crazy!
 
-**Play online:** [https://scout-life-balance.web.app/](https://scout-life-balance.web.app/)
+Inspired by the swipe-based decision game **Reigns**.
+
+**Play online (PL):** [https://scout-life-balance.web.app/](https://scout-life-balance.web.app/)
+
+**Play online (EN):** [https://scout-life-balance-en.web.app/](https://scout-life-balance-en.web.app/)
 
 ## 📂 Project Structure
 
 The most important file for you is:
 
-👉 **`src/data/cards.json`** - **CARDS ARE HERE!**
-All situations, dilemmas, and their consequences are defined in this file. You can edit it to change the game content.
+👉 **`src/data/cards.json`** - **POLISH CARDS ARE HERE!**
+
+👉 **`src/data/cards.en.json`** - **ENGLISH CARDS ARE HERE!**
+
+All situations, dilemmas, and their consequences are defined in these files. You can edit them to change the game content.
 
 Other important files:
 *   `src/store/gameSlice.ts` - Game logic (rules, score calculation).
@@ -20,7 +27,7 @@ Other important files:
 
 ## 🛠️ How to edit cards?
 
-Open `src/data/cards.json`. Each card looks like this:
+Open `src/data/cards.json` or `src/data/cards.en.json`. Each card looks like this:
 
 ```json
 {

@@ -15,10 +15,18 @@ jobs:
         with:
           node-version: 20
           cache: 'npm'
-      - run: npm ci && npm run build
+      - run: npm ci && npm run build:all
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_SCOUT_LIFE_BALANCE }}
           channelId: live
           projectId: scout-life-balance
+          target: pl
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_SCOUT_LIFE_BALANCE }}
+          channelId: live
+          projectId: scout-life-balance
+          target: en

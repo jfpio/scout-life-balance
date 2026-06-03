@@ -6,6 +6,7 @@ export interface Resources {
 }
 
 export type ResourceType = keyof Resources;
+export type GameOverReasons = Record<ResourceType, string>;
 
 export interface Choice {
   text: string;
@@ -23,9 +24,15 @@ export interface Card {
 export interface GameState {
   resources: Resources;
   deck: Card[];
+  gameOverReasons: GameOverReasons;
   currentCardIndex: number;
   isGameOver: boolean;
   weeksSurvived: number;
   gameOverReason?: string;
   gameMode: 'idle' | 'playing' | 'gameover';
+}
+
+export interface StartGamePayload {
+  deck: Card[];
+  gameOverReasons: GameOverReasons;
 }

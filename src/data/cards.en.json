@@ -1,0 +1,692 @@
+[
+  {
+    "id": 1,
+    "image": "⛺",
+    "description": "Next weekend there is a patrol leaders' camp. We are going to the mountains and it will be great, but I also have a test on Monday and should study.",
+    "leftChoice": {
+      "text": "Go to camp",
+      "effects": {
+        "family": 1,
+        "energy": 1,
+        "scouting": 2,
+        "school": -1
+      }
+    },
+    "rightChoice": {
+      "text": "Stay home and study",
+      "effects": {
+        "family": 0,
+        "energy": 0,
+        "scouting": -1,
+        "school": 2
+      }
+    }
+  },
+  {
+    "id": 2,
+    "image": "😰",
+    "description": "You have a test tomorrow and you have not prepared at all.",
+    "leftChoice": {
+      "text": "Study all night",
+      "effects": {
+        "family": 0,
+        "energy": -2,
+        "scouting": 0,
+        "school": 1
+      }
+    },
+    "rightChoice": {
+      "text": "Study until a fixed time and accept the result",
+      "effects": {
+        "family": 0,
+        "energy": 1,
+        "scouting": 0,
+        "school": -1
+      }
+    }
+  },
+  {
+    "id": 3,
+    "image": "🎸",
+    "description": "Your favorite band is playing a concert this weekend.",
+    "leftChoice": {
+      "text": "Great! I'm going!",
+      "effects": {
+        "family": 2,
+        "energy": 0,
+        "scouting": 0,
+        "school": 0
+      }
+    },
+    "rightChoice": {
+      "text": "Better not...",
+      "effects": {
+        "family": -1,
+        "energy": 1,
+        "scouting": 0,
+        "school": 0
+      }
+    }
+  },
+  {
+    "id": 4,
+    "image": "⏳",
+    "description": "Your troop leader tells you to write the yearly plan, because the deadline is in 3 days.",
+    "leftChoice": {
+      "text": "Sit down and write it",
+      "effects": {
+        "family": -1,
+        "energy": -1,
+        "scouting": 2,
+        "school": -1
+      }
+    },
+    "rightChoice": {
+      "text": "One day later will not matter",
+      "effects": {
+        "family": -1,
+        "energy": -1,
+        "scouting": 0,
+        "school": -1
+      }
+    }
+  },
+  {
+    "id": 5,
+    "image": "🌤️",
+    "description": "You have a free afternoon. What do you do?",
+    "leftChoice": {
+      "text": "Study and catch up on scouting work",
+      "effects": {
+        "family": 0,
+        "energy": 0,
+        "scouting": 1,
+        "school": 1
+      }
+    },
+    "rightChoice": {
+      "text": "Go out with friends",
+      "effects": {
+        "family": 1,
+        "energy": 1,
+        "scouting": 0,
+        "school": 0
+      }
+    }
+  },
+  {
+    "id": 6,
+    "image": "📚",
+    "description": "It is test and exam season.",
+    "leftChoice": {
+      "text": "Study all week without leaving home",
+      "effects": {
+        "family": -3,
+        "energy": -2,
+        "scouting": 0,
+        "school": 2
+      }
+    },
+    "rightChoice": {
+      "text": "Study, but keep some time to rest!",
+      "effects": {
+        "family": -1,
+        "energy": 0,
+        "scouting": 0,
+        "school": 1
+      }
+    }
+  },
+  {
+    "id": 7,
+    "image": "🔥",
+    "description": "Your troop has a meeting on Saturday, and your parents suggested a family weekend trip.",
+    "leftChoice": {
+      "text": "Go and help at the troop meeting",
+      "effects": {
+        "family": -1,
+        "energy": 0,
+        "scouting": 2,
+        "school": 0
+      }
+    },
+    "rightChoice": {
+      "text": "Family is more important",
+      "effects": {
+        "family": 2,
+        "energy": 0,
+        "scouting": -3,
+        "school": 0
+      }
+    }
+  },
+  {
+    "id": 8,
+    "image": "👥",
+    "description": "Your friends invite you to study together.",
+    "leftChoice": {
+      "text": "Meet them, it will be good to see them and we will study too.",
+      "effects": {
+        "family": 1,
+        "energy": 0,
+        "scouting": 0,
+        "school": 2
+      }
+    },
+    "rightChoice": {
+      "text": "Study alone.",
+      "effects": {
+        "family": -1,
+        "energy": -1,
+        "scouting": 0,
+        "school": 3
+      }
+    }
+  },
+  {
+    "id": 9,
+    "image": "🤧",
+    "description": "You caught a cold.",
+    "leftChoice": {
+      "text": "Go to school or university!",
+      "effects": {
+        "family": 0,
+        "energy": -2,
+        "scouting": 0,
+        "school": 0
+      }
+    },
+    "rightChoice": {
+      "text": "Stay home and rest",
+      "effects": {
+        "family": 0,
+        "energy": 0,
+        "scouting": 0,
+        "school": -1
+      }
+    }
+  },
+  {
+    "id": 10,
+    "image": "🎬",
+    "description": "A new season of a great Netflix show just came out.",
+    "leftChoice": {
+      "text": "Watch all night",
+      "effects": {
+        "family": 2,
+        "energy": -2,
+        "scouting": 0,
+        "school": -1
+      }
+    },
+    "rightChoice": {
+      "text": "Watch only one episode (really)",
+      "effects": {
+        "family": 1,
+        "energy": 1,
+        "scouting": 0,
+        "school": 0
+      }
+    }
+  },
+  {
+    "id": 11,
+    "image": "🎉",
+    "description": "Your good friend's party is on Friday, and your troop meeting starts Saturday at 10.",
+    "leftChoice": {
+      "text": "Leave early and get more sleep",
+      "effects": {
+        "family": 1,
+        "energy": 1,
+        "scouting": 2,
+        "school": 0
+      }
+    },
+    "rightChoice": {
+      "text": "Party all night and arrive exhausted",
+      "effects": {
+        "family": 2,
+        "energy": -2,
+        "scouting": 1,
+        "school": 0
+      }
+    }
+  },
+  {
+    "id": 12,
+    "image": "⛵",
+    "description": "During the summer, a scout training course overlaps with a trip with friends to the lakes.",
+    "leftChoice": {
+      "text": "Go with friends",
+      "effects": {
+        "family": 2,
+        "energy": 1,
+        "scouting": 0,
+        "school": 0
+      }
+    },
+    "rightChoice": {
+      "text": "Choose the scout course",
+      "effects": {
+        "family": 1,
+        "energy": 1,
+        "scouting": 3,
+        "school": 0
+      }
+    }
+  },
+  {
+    "id": 13,
+    "image": "🤯",
+    "description": "Unfortunately, you took on too much and everything is starting to fall apart.",
+    "leftChoice": {
+      "text": "Uhhh",
+      "effects": {
+        "family": -1,
+        "energy": -1,
+        "scouting": -1,
+        "school": -1
+      }
+    },
+    "rightChoice": {
+      "text": "What?",
+      "effects": {
+        "family": -1,
+        "energy": -1,
+        "scouting": -1,
+        "school": -1
+      }
+    }
+  },
+  {
+    "id": 14,
+    "image": "🆘",
+    "description": "Final exams or university exams are coming, and you realize you have not studied regularly. Things are not looking good.",
+    "leftChoice": {
+      "text": "Oops",
+      "effects": {
+        "family": -1,
+        "energy": -1,
+        "scouting": -1,
+        "school": -2
+      }
+    },
+    "rightChoice": {
+      "text": "Why?",
+      "effects": {
+        "family": -1,
+        "energy": -1,
+        "scouting": -1,
+        "school": -2
+      }
+    }
+  },
+  {
+    "id": 15,
+    "image": "💡",
+    "description": "You and your leadership team had a great flow of ideas for scout activities!",
+    "leftChoice": {
+      "text": "Yes!",
+      "effects": {
+        "family": 1,
+        "energy": 1,
+        "scouting": 2,
+        "school": 0
+      }
+    },
+    "rightChoice": {
+      "text": "Awesome!",
+      "effects": {
+        "family": 1,
+        "energy": 1,
+        "scouting": 2,
+        "school": 0
+      }
+    }
+  },
+  {
+    "id": 17,
+    "image": "🧩",
+    "description": "There is a very difficult scout in your troop.",
+    "leftChoice": {
+      "text": "Talk with them about their problems and try to solve the difficult situation",
+      "effects": {
+        "family": 0,
+        "energy": -1,
+        "scouting": 2,
+        "school": 0
+      }
+    },
+    "rightChoice": {
+      "text": "Leave it alone and hope it solves itself",
+      "effects": {
+        "family": 0,
+        "energy": -2,
+        "scouting": -1,
+        "school": 0
+      }
+    }
+  },
+  {
+    "id": 18,
+    "image": "🏔️",
+    "description": "You are planning a camp. You can make it an epic long-weekend trip, or use a normal weekend.",
+    "leftChoice": {
+      "text": "Use a normal weekend and save the long weekend for friends or rest",
+      "effects": {
+        "family": 2,
+        "energy": 1,
+        "scouting": 1,
+        "school": 0
+      }
+    },
+    "rightChoice": {
+      "text": "Use the long weekend. It will be an amazing expedition!",
+      "effects": {
+        "family": 1,
+        "energy": 0,
+        "scouting": 2,
+        "school": 0
+      }
+    }
+  },
+  {
+    "id": 19,
+    "image": "🏫",
+    "description": "You are failing a school or university year, final exams are near, and your troop is falling apart.",
+    "leftChoice": {
+      "text": "Step away from scouting; school comes first",
+      "effects": {
+        "family": -1,
+        "energy": -2,
+        "scouting": -3,
+        "school": 2
+      }
+    },
+    "rightChoice": {
+      "text": "Keep working with the unit and study as much as you can",
+      "effects": {
+        "family": -1,
+        "energy": -2,
+        "scouting": 1,
+        "school": -2
+      }
+    }
+  },
+  {
+    "id": 20,
+    "image": "💰",
+    "description": "You are organizing a camp. You can choose a cheaper, less ambitious program or a more ambitious and expensive one.",
+    "leftChoice": {
+      "text": "Apply for funding and handle the paperwork",
+      "effects": {
+        "family": 0,
+        "energy": -1,
+        "scouting": 2,
+        "school": -1
+      }
+    },
+    "rightChoice": {
+      "text": "Choose the cheaper option; there is no time for finance paperwork",
+      "effects": {
+        "family": 0,
+        "energy": 0,
+        "scouting": 1,
+        "school": 0
+      }
+    }
+  },
+  {
+    "id": 21,
+    "image": "⚖️",
+    "description": "Your time is limited. You must choose between a private relationship and a scout meeting or fundraiser where the troop really needs support.",
+    "leftChoice": {
+      "text": "Skip the troop event and spend time on the relationship",
+      "effects": {
+        "family": 2,
+        "energy": 0,
+        "scouting": -1,
+        "school": 0
+      }
+    },
+    "rightChoice": {
+      "text": "Go to the meeting or fundraiser",
+      "effects": {
+        "family": -1,
+        "energy": 0,
+        "scouting": 2,
+        "school": 0
+      }
+    }
+  },
+  {
+    "id": 22,
+    "image": "💼",
+    "description": "Your time is limited. You must choose between staying a troop leader and taking a job.",
+    "leftChoice": {
+      "text": "Take the job and let the troop slip",
+      "effects": {
+        "family": 1,
+        "energy": 0,
+        "scouting": -3,
+        "school": 1
+      }
+    },
+    "rightChoice": {
+      "text": "Do not take the job, but keep the troop running perfectly!",
+      "effects": {
+        "family": 0,
+        "energy": 1,
+        "scouting": 2,
+        "school": 0
+      }
+    }
+  },
+  {
+    "id": 23,
+    "image": "⚽",
+    "description": "Sports or extracurricular activities overlap with scout meetings. What do you do?",
+    "leftChoice": {
+      "text": "Choose sports or activities.",
+      "effects": {
+        "family": 1,
+        "energy": 1,
+        "scouting": -1,
+        "school": 1
+      }
+    },
+    "rightChoice": {
+      "text": "Choose scouting",
+      "effects": {
+        "family": 1,
+        "energy": 0,
+        "scouting": 1,
+        "school": 0
+      }
+    }
+  },
+  {
+    "id": 24,
+    "image": "👋",
+    "description": "Many new scouts want to join your troop.",
+    "leftChoice": {
+      "text": "Accept all of them, even though the troop is already large and quality will drop",
+      "effects": {
+        "family": 0,
+        "energy": -1,
+        "scouting": -1,
+        "school": 0
+      }
+    },
+    "rightChoice": {
+      "text": "Accept scouts up to a clear limit and turn the rest away",
+      "effects": {
+        "family": 0,
+        "energy": -1,
+        "scouting": 1,
+        "school": 0
+      }
+    }
+  },
+  {
+    "id": 101,
+    "image": "🌧️",
+    "description": "Heavy rain flooded your storage room. To save the camp equipment, you must act immediately!",
+    "leftChoice": {
+      "text": "Gather the troop and dry everything",
+      "effects": {
+        "family": -2,
+        "energy": -3,
+        "scouting": 1,
+        "school": -1
+      }
+    },
+    "rightChoice": {
+      "text": "Ignore it; you do not have time now",
+      "effects": {
+        "family": 0,
+        "energy": 0,
+        "scouting": -3,
+        "school": 0
+      }
+    }
+  },
+  {
+    "id": 102,
+    "image": "🤒",
+    "description": "You get sick right before an important leadership team trip.",
+    "leftChoice": {
+      "text": "Go despite being sick; you will not leave them",
+      "effects": {
+        "family": -1,
+        "energy": -3,
+        "scouting": 1,
+        "school": 0
+      }
+    },
+    "rightChoice": {
+      "text": "Stay in bed",
+      "effects": {
+        "family": 1,
+        "energy": 2,
+        "scouting": -3,
+        "school": 0
+      }
+    }
+  },
+  {
+    "id": 103,
+    "image": "📉",
+    "description": "Your grades have dropped dramatically. You are at risk of failing.",
+    "leftChoice": {
+      "text": "Drop everything and study for retakes",
+      "effects": {
+        "family": 1,
+        "energy": -2,
+        "scouting": -3,
+        "school": 3
+      }
+    },
+    "rightChoice": {
+      "text": "Try to combine everything somehow (risky)",
+      "effects": {
+        "family": -2,
+        "energy": -2,
+        "scouting": -1,
+        "school": 1
+      }
+    }
+  },
+  {
+    "id": 104,
+    "image": "💔",
+    "description": "Your girlfriend or boyfriend is tired of you never having time.",
+    "leftChoice": {
+      "text": "Choose to save the relationship",
+      "effects": {
+        "family": 3,
+        "energy": 0,
+        "scouting": -2,
+        "school": -1
+      }
+    },
+    "rightChoice": {
+      "text": "Scouting is my love",
+      "effects": {
+        "family": -3,
+        "energy": -1,
+        "scouting": 2,
+        "school": 0
+      }
+    }
+  },
+  {
+    "id": 105,
+    "image": "🔥",
+    "description": "Conflict in the leadership team! Two people want to leave unless you resolve the dispute.",
+    "leftChoice": {
+      "text": "Organize mediation (it will take the whole weekend)",
+      "effects": {
+        "family": -2,
+        "energy": -2,
+        "scouting": 2,
+        "school": -2
+      }
+    },
+    "rightChoice": {
+      "text": "Let them leave; you will manage alone",
+      "effects": {
+        "family": 0,
+        "energy": -3,
+        "scouting": -3,
+        "school": 0
+      }
+    }
+  },
+  {
+    "id": 106,
+    "image": "🧟",
+    "description": "You are completely exhausted and falling asleep in classes and meetings.",
+    "leftChoice": {
+      "text": "Take a month off from scouting",
+      "effects": {
+        "family": 1,
+        "energy": 3,
+        "scouting": -3,
+        "school": 0
+      }
+    },
+    "rightChoice": {
+      "text": "Drink another coffee and push on",
+      "effects": {
+        "family": -1,
+        "energy": -2,
+        "scouting": 1,
+        "school": -1
+      }
+    }
+  },
+  {
+    "id": 107,
+    "image": "🏚️",
+    "description": "Your scout room needs a major renovation, and the community is threatening to evict you.",
+    "leftChoice": {
+      "text": "Renovate it yourselves (hard work)",
+      "effects": {
+        "family": -1,
+        "energy": -3,
+        "scouting": 2,
+        "school": -1
+      }
+    },
+    "rightChoice": {
+      "text": "Give up the scout room",
+      "effects": {
+        "family": 0,
+        "energy": -1,
+        "scouting": -3,
+        "school": 0
+      }
+    }
+  }
+]

@@ -7,9 +7,7 @@ import { ResourceBar } from '../components/ResourceBar';
 import { Button } from '../components/Button';
 import { startGame, resetGame, applyCardEffect, continueGame } from '../store/gameSlice';
 import { SwipeCard } from '../components/SwipeCard';
-
-// Temporary mock deck
-
+import { content } from '../i18n';
 
 const Game: React.FC = () => {
   const dispatch = useDispatch();
@@ -21,12 +19,12 @@ const Game: React.FC = () => {
   
   useEffect(() => {
     if (gameMode === 'idle') {
-      dispatch(startGame([])); // Empty array triggers default deck in reducer
+      dispatch(startGame({ deck: content.deck, gameOverReasons: content.game.gameOverReasons }));
     }
   }, [dispatch, gameMode]);
 
   const handleRestart = () => {
-    dispatch(startGame([]));
+    dispatch(startGame({ deck: content.deck, gameOverReasons: content.game.gameOverReasons }));
   };
 
   const handleExit = () => {
@@ -63,7 +61,7 @@ const Game: React.FC = () => {
            <ArrowLeft size={20} className="text-gray-600" />
         </button>
         <div className="bg-white/80 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-bold shadow-sm">
-          Tydzień: {weeksSurvived}
+          {content.game.weekLabel(weeksSurvived)}
         </div>
       </div>
 
@@ -84,6 +82,7 @@ const Game: React.FC = () => {
                         onDragStart={() => {}}
                         onDragEnd={() => {}}
                         onDrag={handleDrag}
+                        imageAlt={content.game.imageAlt}
                     />
                 </div>
             )}
@@ -91,8 +90,8 @@ const Game: React.FC = () => {
             {/* Empty State / Game Won */}
             {!currentCard && !isGameOver && (
                 <div className="absolute inset-0 z-10 bg-white rounded-2xl shadow-xl flex items-center justify-center p-6 text-center">
-                    <h3 className="text-xl font-bold text-gray-800">Brak nowych wyzwań!</h3>
-                    <p className="text-gray-500 mt-2">Czekaj na aktualizację...</p>
+                    <h3 className="text-xl font-bold text-gray-800">{content.game.emptyTitle}</h3>
+                    <p className="text-gray-500 mt-2">{content.game.emptySubtitle}</p>
                 </div>
             )}
          </div>
@@ -105,28 +104,28 @@ const Game: React.FC = () => {
             icon={Heart} 
             value={resources.family} 
             color="bg-red-500" 
-            label="Rodzina" 
+            label={content.resources.family.short} 
             previewChange={isGameOver ? 0 : getResourcePreview('family')}
           />
           <ResourceBar 
             icon={Users} 
             value={resources.scouting} 
             color="bg-blue-500" 
-            label="Drużyna" 
+            label={content.resources.scouting.short} 
             previewChange={isGameOver ? 0 : getResourcePreview('scouting')}
           />
           <ResourceBar 
             icon={Book} 
             value={resources.school} 
             color="bg-yellow-500" 
-            label="Szkoła" 
+            label={content.resources.school.short} 
             previewChange={isGameOver ? 0 : getResourcePreview('school')}
           />
           <ResourceBar 
             icon={Zap} 
             value={resources.energy} 
             color="bg-green-500" 
-            label="Energia" 
+            label={content.resources.energy.short} 
             previewChange={isGameOver ? 0 : getResourcePreview('energy')}
           />
         </div>
@@ -138,14 +137,10 @@ const Game: React.FC = () => {
            <div className="w-full max-w-sm bg-white rounded-3xl shadow-2xl p-8 text-center space-y-6 transform animate-in zoom-in-95 duration-300">
              
              <div className="space-y-2">
-               <h2 className="text-3xl font-bold text-gray-900">Koniec Gry</h2>
+               <h2 className="text-3xl font-bold text-gray-900">{content.game.gameOverTitle}</h2>
                <div className="inline-block bg-gray-100 px-4 py-1 rounded-full">
                   <p className="text-sm font-semibold text-gray-600">
-                    Przetrwałeś {weeksSurvived} {
-                    weeksSurvived === 1 ? 'tydzień' :
-                    (weeksSurvived % 10 >= 2 && weeksSurvived % 10 <= 4 && (weeksSurvived % 100 < 10 || weeksSurvived % 100 >= 20)) ? 'tygodnie' :
-                    'tygodni'
-                  }
+                    {content.game.survivedText(weeksSurvived)}
                   </p>
                </div>
              </div>
@@ -158,11 +153,11 @@ const Game: React.FC = () => {
 
              {/* Secret Password Field */}
              <div className="pt-2">
-                <p className="text-xs text-center text-gray-400 mb-1 uppercase tracking-wider font-bold">Tajne hasło</p>
+                <p className="text-xs text-center text-gray-400 mb-1 uppercase tracking-wider font-bold">{content.game.secretPasswordLabel}</p>
                 <div className="relative">
                   <input 
                     type="password" 
-                    placeholder="Wpisz hasło..." 
+                    placeholder={content.game.secretPasswordPlaceholder}
                     className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-2 text-center text-gray-700 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all placeholder:text-gray-400"
                     onChange={(e) => {
                       if (e.target.value.toLowerCase() === 'wsparcie') {
@@ -177,11 +172,11 @@ const Game: React.FC = () => {
                 <Button fullWidth onClick={handleRestart} className="shadow-lg shadow-blue-100">
                   <div className="flex items-center justify-center gap-2">
                     <RotateCcw size={18} />
-                    <span>Zagraj ponownie</span>
+                    <span>{content.game.restart}</span>
                   </div>
                 </Button>
                 <Button fullWidth variant="secondary" onClick={handleExit}>
-                  Wróć do menu
+                  {content.game.backToMenu}
                 </Button>
              </div>
            </div>

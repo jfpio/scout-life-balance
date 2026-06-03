@@ -8,6 +8,7 @@ interface SwipeCardProps {
   onDragStart: () => void;
   onDragEnd: () => void;
   onDrag: (offset: number) => void; // Pass offset to parent for resource preview
+  imageAlt: string;
 }
 
 export const SwipeCard: React.FC<SwipeCardProps> = ({ 
@@ -15,7 +16,8 @@ export const SwipeCard: React.FC<SwipeCardProps> = ({
   onSwipe, 
   onDragStart, 
   onDragEnd,
-  onDrag 
+  onDrag,
+  imageAlt
 }) => {
   const controls = useAnimation();
   const x = useMotionValue(0);
@@ -68,7 +70,7 @@ export const SwipeCard: React.FC<SwipeCardProps> = ({
     };
   }, [isDragging, controls, x]);
 
-  const handleDragEnd = async (_: any, info: PanInfo) => {
+  const handleDragEnd = async (_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
     const threshold = 100;
     const velocity = info.velocity.x;
     const offset = info.offset.x;
@@ -95,7 +97,7 @@ export const SwipeCard: React.FC<SwipeCardProps> = ({
     }
   };
 
-  const handleDrag = (_: any, info: PanInfo) => {
+  const handleDrag = (_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
     onDrag(info.offset.x);
   };
 
@@ -136,7 +138,7 @@ export const SwipeCard: React.FC<SwipeCardProps> = ({
                 {card.image.length < 5 ? (
                     <span className="text-6xl">{card.image}</span>
                 ) : (
-                    <img src={card.image} alt="Situation" className="w-full h-full object-cover" />
+                    <img src={card.image} alt={imageAlt} className="w-full h-full object-cover" />
                 )}
             </div>
         )}
