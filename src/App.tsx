@@ -6,6 +6,8 @@ import { Layout } from './components/Layout';
 import Home from './pages/Home';
 import Game from './pages/Game';
 import Instructions from './pages/Instructions';
+import CreateCustomGame from './pages/CreateCustomGame';
+import CustomGame from './pages/CustomGame';
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/game" element={<Game />} />
+            <Route path="/create" element={<CreateCustomGame />} />
+            <Route path="/custom/:slug" element={<CustomGame />} />
             <Route path="/instructions" element={<Instructions />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>

@@ -1,0 +1,49 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /customGames/{slug} {
+      allow get: if !exists(/databases/$(database)/documents/customGames/$(slug))
+        || resource.data.expiresAt > request.time;
+      allow list: if false;
+      allow create: if isValidCustomGame(slug);
+      allow update: if false;
+      allow delete: if resource.data.expiresAt <= request.time;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+
+  function isValidCustomGame(slug) {
+    return request.resource.data.keys().hasOnly([
+      'slug',
+      'cards',
+      'gameOverReasons',
+      'createdAt',
+      'expiresAt',
+      'sourceSheetUrl',
+      'sourceSpreadsheetId',
+      'cardCount'
+    ])
+    && request.resource.data.slug == slug
+    && slug.matches('^[a-z0-9]{9}$')
+    && request.resource.data.cards is list
+    && request.resource.data.cardCount is int
+    && request.resource.data.cardCount >= 1
+    && request.resource.data.cardCount <= 200
+    && request.resource.data.cards.size() == request.resource.data.cardCount
+    && request.resource.data.gameOverReasons is map
+    && request.resource.data.createdAt is timestamp
+    && request.resource.data.createdAt >= request.time - duration.value(10, 'm')
+    && request.resource.data.createdAt <= request.time + duration.value(10, 'm')
+    && request.resource.data.expiresAt is timestamp
+    && request.resource.data.expiresAt > request.time
+    && request.resource.data.expiresAt <= request.time + duration.value(14, 'd') + duration.value(10, 'm')
+    && request.resource.data.sourceSheetUrl is string
+    && request.resource.data.sourceSheetUrl.size() <= 300
+    && request.resource.data.sourceSpreadsheetId is string
+    && request.resource.data.sourceSpreadsheetId.matches('^[a-zA-Z0-9-_]+$');
+  }
+}
