@@ -18,6 +18,9 @@ const copy = {
     passwordPlaceholder: 'Hasło',
     passwordSubmit: 'Odblokuj',
     passwordError: 'Nieprawidłowe hasło.',
+    templateTitle: 'Szablon arkusza',
+    templateText: 'Skopiuj szablon do swojego Google Drive, uzupełnij aktywne karty i udostępnij arkusz jako „każdy z linkiem może wyświetlać”.',
+    templateOpen: 'Otwórz szablon',
     submit: 'Utwórz grę',
     creating: 'Tworzę grę...',
     back: 'Wróć',
@@ -39,6 +42,9 @@ const copy = {
     passwordPlaceholder: 'Password',
     passwordSubmit: 'Unlock',
     passwordError: 'Wrong password.',
+    templateTitle: 'Spreadsheet template',
+    templateText: 'Copy the template to your Google Drive, fill in the active cards, and share it as anyone with the link can view.',
+    templateOpen: 'Open template',
     submit: 'Create game',
     creating: 'Creating game...',
     back: 'Back',
@@ -50,6 +56,9 @@ const copy = {
     configError: 'Firebase configuration is missing for this feature.',
   },
 };
+
+const TEMPLATE_SHEET_URL =
+  'https://docs.google.com/spreadsheets/d/126XIXQjlBxvgHlEcSVn-mTeAFt_jA_o-KYZcre94HiA/edit?usp=sharing';
 
 const CreateCustomGame: React.FC = () => {
   const navigate = useNavigate();
@@ -150,6 +159,19 @@ const CreateCustomGame: React.FC = () => {
 
         {isUnlocked && !result && (
           <form onSubmit={handleSubmit} className="space-y-5">
+            <div className="rounded-3xl border border-[var(--slb-line)] bg-white/80 p-5 shadow-sm">
+              <h2 className="font-display text-lg font-black text-[var(--slb-ink)]">{text.templateTitle}</h2>
+              <p className="mt-1 text-sm leading-relaxed text-[var(--slb-muted)]">{text.templateText}</p>
+              <a
+                href={TEMPLATE_SHEET_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-flex min-h-11 items-center justify-center rounded-full bg-[#EEF5EF] px-5 font-display text-sm font-black text-[var(--slb-pine)] transition-colors hover:bg-[#E0EFE5]"
+              >
+                {text.templateOpen}
+              </a>
+            </div>
+
             <label className="block space-y-2">
               <span className="font-display text-xs font-black uppercase tracking-[0.12em] text-[var(--slb-muted)]">{text.sheetLabel}</span>
               <input

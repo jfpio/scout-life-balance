@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Stwórz własną grę - Scout Life Balance</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <a class="brand" href="./index.html">Scout Life Balance</a>
+        <nav class="nav" aria-label="Dokumentacja">
+          <a href="./gra.html">Gra</a>
+          <a href="./stworz-wlasna-gre.html">Stwórz własną grę</a>
+          <a href="./scenariusz.html">Scenariusz zajęć</a>
+        </nav>
+      </header>
+
+      <section class="hero">
+        <div>
+          <p class="eyebrow">2. Stwórz własną grę</p>
+          <h1>Własny zestaw kart z Google Sheets.</h1>
+          <p class="lead">
+            Instruktor może przygotować arkusz z własnymi sytuacjami, wkleić publiczny link
+            w aplikacji i dostać unikalny adres oraz QR kod dla uczestników.
+          </p>
+          <div class="actions">
+            <a
+              class="button"
+              href="https://docs.google.com/spreadsheets/d/126XIXQjlBxvgHlEcSVn-mTeAFt_jA_o-KYZcre94HiA/edit?usp=sharing"
+            >
+              Otwórz szablon arkusza
+            </a>
+            <a class="button secondary" href="https://scout-life-balance.web.app/create">
+              Otwórz kreator gry
+            </a>
+          </div>
+        </div>
+        <figure class="shot">
+          <img src="./assets/create-password.png" alt="Ekran tworzenia własnej gry z polem hasła." />
+        </figure>
+      </section>
+
+      <section>
+        <h2>Kroki dla prowadzącego</h2>
+        <ol class="steps">
+          <li>Otwórz szablon arkusza i użyj opcji <strong>Plik → Utwórz kopię</strong>.</li>
+          <li>Wypełnij zakładkę <code>Cards</code>. Aktywne karty oznacz statusem <code>Active</code>.</li>
+          <li>Udostępnij arkusz jako <strong>każdy z linkiem może wyświetlać</strong>.</li>
+          <li>Otwórz ekran „Stwórz własną grę” i wpisz hasło <code>instruktor</code>.</li>
+          <li>Wklej link do arkusza i utwórz grę.</li>
+          <li>Pokaż uczestnikom wygenerowany QR kod albo wyślij im link.</li>
+        </ol>
+      </section>
+
+      <section class="note">
+        <h3>Ważne ograniczenia</h3>
+        <p>
+          Własna gra jest snapshotem arkusza. Późniejsze zmiany w Google Sheets nie zmienią już
+          wygenerowanej gry. Link działa przez 14 dni. Hasło <code>instruktor</code> chroni tylko
+          ekran tworzenia, a nie samą rozgrywkę.
+        </p>
+      </section>
+
+      <section>
+        <h2>Jak pisać dobre karty?</h2>
+        <ul class="steps">
+          <li>Pisz sytuacje krótko i konkretnie, najlepiej z życia uczestników kursu.</li>
+          <li>Dawaj dwie decyzje, które obie są jakoś uzasadnione. Unikaj oczywistych pułapek.</li>
+          <li>Efekty ustawiaj w skali od <code>-3</code> do <code>3</code>; większość kart powinna mieć mały albo średni wpływ.</li>
+          <li>Zostaw status <code>Draft</code> przy kartach, które nie są jeszcze gotowe.</li>
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>

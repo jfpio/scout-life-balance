@@ -8,6 +8,12 @@ Inspired by the swipe-based decision game **Reigns**.
 
 **Play online (EN):** [https://scout-life-balance-en.web.app/](https://scout-life-balance-en.web.app/)
 
+**Instructor documentation:** open [`docs/index.html`](docs/index.html) or publish the `docs/` folder with GitHub Pages.
+
+Quick passwords for facilitators:
+* Custom game creator password: `instruktor`
+* Secret password to continue after game over: `wsparcie`
+
 ## 📂 Project Structure
 
 The most important file for you is:
@@ -83,12 +89,13 @@ We use a **-3 to 3** scale, where:
 
 The app can create a temporary custom game from a public Google Sheets template:
 
-1. Import/use the workbook template and edit the `Cards` tab.
-2. Share the spreadsheet as **anyone with the link can view**.
-3. Open `/create` and paste the spreadsheet link.
-4. Share the generated `/custom/<slug>` link or QR code.
+1. Open the template spreadsheet: [Scout Life Balance Google Sheets template](https://docs.google.com/spreadsheets/d/126XIXQjlBxvgHlEcSVn-mTeAFt_jA_o-KYZcre94HiA/edit?usp=sharing).
+2. Create your own copy and edit the `Cards` tab.
+3. Share the spreadsheet as **anyone with the link can view**.
+4. Open `/create`, unlock it with the simple creator password `instruktor`, and paste the spreadsheet link.
+5. Share the generated `/custom/<slug>` link or QR code.
 
-Custom games are stored in Firestore with a 14-day expiration. This Spark-compatible version does not use Cloud Functions, Secret Manager, Cloud Build, or Artifact Registry.
+Custom games are stored in Firestore with a 14-day expiration. This Spark-compatible version does not use Cloud Functions, Secret Manager, Cloud Build, or Artifact Registry. The creator password is a lightweight client-side gate, not a secure backend secret.
 
 ### Frontend Firebase env vars
 
@@ -110,6 +117,16 @@ firebase deploy --only firestore,hosting
 ```
 
 Expired games are rejected by Firestore rules and by the app. Automatic background cleanup is not available without a backend; expired documents can remain stored until manually deleted or visited by tooling you add later.
+
+### GitHub Pages instructor docs
+
+Static documentation for course facilitators lives in `docs/`:
+
+* `docs/gra.html` - game idea and basic rules
+* `docs/stworz-wlasna-gre.html` - custom game workflow, template link, and screenshots
+* `docs/scenariusz.html` - placeholder for a sample course session scenario
+
+To publish it with GitHub Pages, set the Pages source to this branch and the `/docs` folder in repository settings.
 
 ---
 
