@@ -80,25 +80,26 @@ const Game: React.FC<GameProps> = ({
   };
 
   return (
-    <div className="flex flex-col h-[100dvh] bg-gray-50 relative overflow-hidden">
-      {/* Header */}
-      <div className="absolute top-0 w-full z-50 flex justify-between items-center p-4">
-        <button onClick={handleExit} className="p-2 bg-white/80 backdrop-blur-sm rounded-full shadow-sm hover:bg-white transition-colors">
-           <ArrowLeft size={20} className="text-gray-600" />
+    <div className="relative flex h-[100dvh] flex-col overflow-hidden">
+      <div className="z-40 flex items-center justify-between px-4 pb-2 pt-12">
+        <button
+          onClick={handleExit}
+          className="grid size-11 place-items-center rounded-full border border-[var(--slb-line)] bg-white/90 text-[var(--slb-ink)] shadow-sm backdrop-blur transition-colors hover:bg-white"
+          aria-label={content.game.backToMenu}
+        >
+           <ArrowLeft size={20} />
         </button>
-        <div className="bg-white/80 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-bold shadow-sm">
+        <div className="flex items-center gap-2 rounded-full border border-[var(--slb-line)] bg-white/90 px-4 py-2 font-display text-sm font-black text-[var(--slb-ink)] shadow-sm backdrop-blur">
+          <span className="size-2.5 rotate-45 rounded-[2px] bg-[var(--slb-orange)]" />
           {content.game.weekLabel(weeksSurvived)}
         </div>
       </div>
 
-      {/* Main Game Area (Card) */}
-      <div className="flex-1 flex items-center justify-center p-4 mt-4 mb-32 relative w-full h-full max-h-[80dvh]">
-         <div className="relative w-full max-w-[360px] h-full max-h-[70dvh] min-h-[300px] aspect-[3/4]">
-            {/* Background cards for stack effect */}
-            <div className="absolute top-2 left-0 right-0 h-full bg-white rounded-2xl shadow-sm scale-95 opacity-50 translate-y-2" />
-            <div className="absolute top-4 left-0 right-0 h-full bg-white rounded-2xl shadow-sm scale-90 opacity-30 translate-y-4" />
+      <div className="relative flex flex-1 items-center justify-center px-5 pb-[148px] pt-2">
+         <div className="relative h-full min-h-[320px] w-full max-w-[326px] max-h-[520px]">
+            <div className="absolute inset-0 translate-y-4 rotate-[-3deg] rounded-[32px] border border-[var(--slb-line)] bg-white/55 shadow-sm" />
+            <div className="absolute inset-0 translate-y-2 rotate-[3deg] rounded-[32px] border border-[var(--slb-line)] bg-white/80 shadow-sm" />
             
-            {/* Active Card */}
             {currentCard && !isGameOver && (
                 <div className="absolute inset-0 z-20">
                     <SwipeCard 
@@ -113,44 +114,42 @@ const Game: React.FC<GameProps> = ({
                 </div>
             )}
             
-            {/* Empty State / Game Won */}
             {!currentCard && !isGameOver && (
-                <div className="absolute inset-0 z-10 bg-white rounded-2xl shadow-xl flex items-center justify-center p-6 text-center">
-                    <h3 className="text-xl font-bold text-gray-800">{content.game.emptyTitle}</h3>
-                    <p className="text-gray-500 mt-2">{content.game.emptySubtitle}</p>
+                <div className="absolute inset-0 z-10 flex flex-col items-center justify-center rounded-[32px] border border-[var(--slb-line)] bg-white p-6 text-center shadow-[0_22px_60px_rgba(33,48,42,0.16)]">
+                    <h3 className="font-display text-2xl font-black text-[var(--slb-ink)]">{content.game.emptyTitle}</h3>
+                    <p className="mt-2 leading-relaxed text-[var(--slb-muted)]">{content.game.emptySubtitle}</p>
                 </div>
             )}
          </div>
       </div>
 
-      {/* Resources Footer */}
-      <div className="absolute bottom-0 w-full bg-white border-t border-gray-100 p-4 pb-8 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] rounded-t-3xl transition-transform duration-300">
-        <div className="grid grid-cols-2 gap-x-6 gap-y-3">
+      <div className="absolute bottom-0 w-full px-3 pb-4">
+        <div className="grid grid-cols-4 gap-2 rounded-[30px] border border-[var(--slb-line)] bg-white/[0.92] px-3 py-4 shadow-[0_-18px_42px_rgba(33,48,42,0.12)] backdrop-blur">
           <ResourceBar 
             icon={Heart} 
             value={resources.family} 
-            color="bg-red-500" 
+            color="#C96A2E" 
             label={content.resources.family.short} 
             previewChange={isGameOver ? 0 : getResourcePreview('family')}
           />
           <ResourceBar 
             icon={Users} 
             value={resources.scouting} 
-            color="bg-blue-500" 
+            color="#2F5A45" 
             label={content.resources.scouting.short} 
             previewChange={isGameOver ? 0 : getResourcePreview('scouting')}
           />
           <ResourceBar 
             icon={Book} 
             value={resources.school} 
-            color="bg-yellow-500" 
+            color="#8A6F2F" 
             label={content.resources.school.short} 
             previewChange={isGameOver ? 0 : getResourcePreview('school')}
           />
           <ResourceBar 
             icon={Zap} 
             value={resources.energy} 
-            color="bg-green-500" 
+            color="#3E7A66" 
             label={content.resources.energy.short} 
             previewChange={isGameOver ? 0 : getResourcePreview('energy')}
           />
@@ -159,32 +158,31 @@ const Game: React.FC<GameProps> = ({
 
       {/* Game Over Overlay */}
       {isGameOver && (
-        <div className="absolute inset-0 z-50 bg-black/60 backdrop-blur-md flex flex-col justify-center items-center p-6 animate-in fade-in duration-300">
-           <div className="w-full max-w-sm bg-white rounded-3xl shadow-2xl p-8 text-center space-y-6 transform animate-in zoom-in-95 duration-300">
+        <div className="absolute inset-0 z-50 flex items-end bg-[rgba(33,48,42,0.45)] p-3 backdrop-blur-sm">
+           <div className="sheet-up w-full rounded-[34px] border border-[var(--slb-line)] bg-white p-6 text-center shadow-2xl">
              
              <div className="space-y-2">
-               <h2 className="text-3xl font-bold text-gray-900">{content.game.gameOverTitle}</h2>
-               <div className="inline-block bg-gray-100 px-4 py-1 rounded-full">
-                  <p className="text-sm font-semibold text-gray-600">
+               <h2 className="font-display text-3xl font-black text-[var(--slb-ink)]">{content.game.gameOverTitle}</h2>
+               <div className="inline-block rounded-full bg-[#EEF5EF] px-4 py-1">
+                  <p className="font-display text-xs font-black uppercase tracking-[0.08em] text-[var(--slb-pine)]">
                     {content.game.survivedText(weeksSurvived)}
                   </p>
                </div>
              </div>
              
-             <div className="bg-red-50 p-4 rounded-xl border border-red-100">
-               <p className="text-gray-800 font-medium leading-relaxed">
+             <div className="mt-5 rounded-2xl border border-[rgba(201,106,46,0.18)] bg-[#FFF4EA] p-4">
+               <p className="font-medium leading-relaxed text-[var(--slb-ink)]">
                  {gameOverReason}
                </p>
              </div>
 
-             {/* Secret Password Field */}
-             <div className="pt-2">
-                <p className="text-xs text-center text-gray-400 mb-1 uppercase tracking-wider font-bold">{content.game.secretPasswordLabel}</p>
+             <div className="pt-5">
+                <p className="mb-2 text-center font-display text-[10px] font-black uppercase tracking-[0.12em] text-[var(--slb-muted)]">{content.game.secretPasswordLabel}</p>
                 <div className="relative">
                   <input 
                     type="password" 
                     placeholder={content.game.secretPasswordPlaceholder}
-                    className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-2 text-center text-gray-700 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all placeholder:text-gray-400"
+                    className="w-full rounded-full border border-[var(--slb-line)] bg-[#FBFAF6] px-4 py-3 text-center text-[var(--slb-ink)] outline-none transition-all placeholder:text-[var(--slb-muted)] focus:border-[var(--slb-pine)] focus:ring-2 focus:ring-[rgba(47,90,69,0.14)]"
                     onChange={(e) => {
                       if (e.target.value.toLowerCase() === 'wsparcie') {
                         dispatch(continueGame());
@@ -194,8 +192,8 @@ const Game: React.FC<GameProps> = ({
                 </div>
              </div>
 
-             <div className="space-y-3 pt-2">
-                <Button fullWidth onClick={handleRestart} className="shadow-lg shadow-blue-100">
+             <div className="space-y-3 pt-5">
+                <Button fullWidth onClick={handleRestart}>
                   <div className="flex items-center justify-center gap-2">
                     <RotateCcw size={18} />
                     <span>{content.game.restart}</span>

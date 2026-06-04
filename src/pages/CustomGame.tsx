@@ -80,24 +80,24 @@ const CustomGame: React.FC = () => {
   }
 
   return (
-    <div className="flex h-full flex-col items-center justify-center bg-gray-50 p-6 text-center">
+    <div className="flex h-full flex-col items-center justify-center p-6 text-center">
       {isLoading ? (
         <div className="space-y-3">
-          <Loader2 size={32} className="mx-auto animate-spin text-blue-600" />
-          <p className="text-sm font-semibold text-gray-600">{text.loading}</p>
+          <Loader2 size={32} className="mx-auto animate-spin text-[var(--slb-pine)]" />
+          <p className="text-sm font-semibold text-[var(--slb-muted)]">{text.loading}</p>
         </div>
       ) : (
         <div className="w-full max-w-xs space-y-5">
           <button
             onClick={() => navigate('/')}
-            className="mx-auto rounded-full bg-white p-3 text-gray-600 shadow-sm transition-colors hover:bg-gray-100"
+            className="mx-auto grid size-12 place-items-center rounded-full border border-[var(--slb-line)] bg-white text-[var(--slb-ink)] shadow-sm transition-colors hover:bg-white/80"
             aria-label={text.back}
           >
             <ArrowLeft size={20} />
           </button>
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">{text.unavailableTitle}</h1>
-            <p className="mt-2 text-sm text-gray-500">{error ?? text.unavailableText}</p>
+            <h1 className="font-display text-2xl font-black text-[var(--slb-ink)]">{text.unavailableTitle}</h1>
+            <p className="mt-2 text-sm leading-relaxed text-[var(--slb-muted)]">{error ?? text.unavailableText}</p>
           </div>
           <Button fullWidth onClick={() => navigate('/')}>
             {text.back}

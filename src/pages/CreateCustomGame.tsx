@@ -12,6 +12,12 @@ const copy = {
     subtitle: 'Wklej publiczny link do Google Sheets z szablonem kart.',
     sheetLabel: 'Link do Google Sheets',
     sheetPlaceholder: 'https://docs.google.com/spreadsheets/d/...',
+    passwordTitle: 'Dostęp dla instruktorów',
+    passwordText: 'Wpisz proste hasło, aby utworzyć własną wersję gry.',
+    passwordLabel: 'Hasło',
+    passwordPlaceholder: 'Hasło',
+    passwordSubmit: 'Odblokuj',
+    passwordError: 'Nieprawidłowe hasło.',
     submit: 'Utwórz grę',
     creating: 'Tworzę grę...',
     back: 'Wróć',
@@ -27,6 +33,12 @@ const copy = {
     subtitle: 'Paste a public Google Sheets link that uses the card template.',
     sheetLabel: 'Google Sheets link',
     sheetPlaceholder: 'https://docs.google.com/spreadsheets/d/...',
+    passwordTitle: 'Leader access',
+    passwordText: 'Enter the simple password to create a custom game.',
+    passwordLabel: 'Password',
+    passwordPlaceholder: 'Password',
+    passwordSubmit: 'Unlock',
+    passwordError: 'Wrong password.',
     submit: 'Create game',
     creating: 'Creating game...',
     back: 'Back',
@@ -42,6 +54,11 @@ const copy = {
 const CreateCustomGame: React.FC = () => {
   const navigate = useNavigate();
   const text = copy[activeLocale];
+  const [isUnlocked, setIsUnlocked] = React.useState(
+    () => sessionStorage.getItem('custom-game-creator-unlocked') === 'true',
+  );
+  const [creatorPassword, setCreatorPassword] = React.useState('');
+  const [passwordError, setPasswordError] = React.useState('');
   const [sheetUrl, setSheetUrl] = React.useState('');
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [result, setResult] = React.useState<CreateCustomGameResult | null>(null);
@@ -63,6 +80,19 @@ const CreateCustomGame: React.FC = () => {
     }
   };
 
+  const handleUnlock = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (creatorPassword.trim().toLowerCase() !== 'instruktor') {
+      setPasswordError(text.passwordError);
+      return;
+    }
+
+    sessionStorage.setItem('custom-game-creator-unlocked', 'true');
+    setIsUnlocked(true);
+    setPasswordError('');
+    setCreatorPassword('');
+  };
+
   const handleCopy = async () => {
     if (result) {
       await navigator.clipboard.writeText(result.url);
@@ -70,38 +100,70 @@ const CreateCustomGame: React.FC = () => {
   };
 
   return (
-    <div className="flex h-full flex-col bg-gray-50">
-      <div className="flex items-center gap-3 border-b border-gray-100 bg-white p-4">
+    <div className="flex h-full flex-col">
+      <div className="flex items-center gap-3 px-5 pb-4 pt-12">
         <button
           onClick={() => navigate('/')}
-          className="rounded-full bg-gray-100 p-2 text-gray-600 transition-colors hover:bg-gray-200"
+          className="grid size-11 place-items-center rounded-full border border-[var(--slb-line)] bg-white text-[var(--slb-ink)] shadow-sm transition-colors hover:bg-white/80"
           aria-label={text.back}
         >
           <ArrowLeft size={20} />
         </button>
         <div>
-          <h1 className="text-xl font-bold text-gray-900">{text.title}</h1>
-          <p className="text-sm text-gray-500">{text.subtitle}</p>
+          <h1 className="font-display text-2xl font-black text-[var(--slb-ink)]">{text.title}</h1>
+          <p className="text-sm text-[var(--slb-muted)]">{text.subtitle}</p>
         </div>
       </div>
 
-      <div className="flex-1 overflow-y-auto p-5">
-        {!result && (
+      <div className="flex-1 overflow-y-auto px-5 pb-6">
+        {!isUnlocked && (
+          <form onSubmit={handleUnlock} className="space-y-5">
+            <div className="rounded-3xl border border-[var(--slb-line)] bg-white/80 p-5 shadow-sm">
+              <h2 className="font-display text-lg font-black text-[var(--slb-ink)]">{text.passwordTitle}</h2>
+              <p className="mt-1 text-sm leading-relaxed text-[var(--slb-muted)]">{text.passwordText}</p>
+            </div>
+
+            <label className="block space-y-2">
+              <span className="font-display text-xs font-black uppercase tracking-[0.12em] text-[var(--slb-muted)]">{text.passwordLabel}</span>
+              <input
+                value={creatorPassword}
+                onChange={(event) => setCreatorPassword(event.target.value)}
+                placeholder={text.passwordPlaceholder}
+                type="password"
+                autoComplete="current-password"
+                required
+                className="w-full rounded-full border border-[var(--slb-line)] bg-white px-4 py-3 text-sm text-[var(--slb-ink)] outline-none transition-all placeholder:text-[var(--slb-muted)] focus:border-[var(--slb-pine)] focus:ring-2 focus:ring-[rgba(47,90,69,0.14)]"
+              />
+            </label>
+
+            {passwordError && (
+              <div className="rounded-2xl border border-[rgba(201,106,46,0.22)] bg-[#FFF4EA] p-4 text-sm font-semibold text-[var(--slb-orange)]">
+                {passwordError}
+              </div>
+            )}
+
+            <Button fullWidth type="submit">
+              {text.passwordSubmit}
+            </Button>
+          </form>
+        )}
+
+        {isUnlocked && !result && (
           <form onSubmit={handleSubmit} className="space-y-5">
             <label className="block space-y-2">
-              <span className="text-sm font-semibold text-gray-700">{text.sheetLabel}</span>
+              <span className="font-display text-xs font-black uppercase tracking-[0.12em] text-[var(--slb-muted)]">{text.sheetLabel}</span>
               <input
                 value={sheetUrl}
                 onChange={(event) => setSheetUrl(event.target.value)}
                 placeholder={text.sheetPlaceholder}
                 type="url"
                 required
-                className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm outline-none transition-all focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                className="w-full rounded-full border border-[var(--slb-line)] bg-white px-4 py-3 text-sm text-[var(--slb-ink)] outline-none transition-all placeholder:text-[var(--slb-muted)] focus:border-[var(--slb-pine)] focus:ring-2 focus:ring-[rgba(47,90,69,0.14)]"
               />
             </label>
 
             {error && (
-              <div className="rounded-xl border border-red-100 bg-red-50 p-4 text-sm text-red-800">
+              <div className="rounded-2xl border border-[rgba(201,106,46,0.22)] bg-[#FFF4EA] p-4 text-sm text-[var(--slb-orange)]">
                 <p className="font-semibold">
                   {error instanceof CustomGameApiError && error.errors.length > 0
                     ? text.validationTitle
@@ -131,21 +193,21 @@ const CreateCustomGame: React.FC = () => {
 
         {result && (
           <div className="space-y-5">
-            <div className="rounded-xl border border-green-100 bg-green-50 p-4">
-              <h2 className="text-lg font-bold text-green-900">{text.successTitle}</h2>
-              <p className="mt-1 text-sm text-green-800">{text.successText(result.cardCount)}</p>
+            <div className="rounded-3xl border border-[rgba(47,90,69,0.18)] bg-[#EEF5EF] p-5">
+              <h2 className="font-display text-lg font-black text-[var(--slb-pine)]">{text.successTitle}</h2>
+              <p className="mt-1 text-sm leading-relaxed text-[var(--slb-pine)]">{text.successText(result.cardCount)}</p>
             </div>
 
-            <div className="flex justify-center rounded-xl border border-gray-100 bg-white p-5">
+            <div className="flex justify-center rounded-3xl border border-[var(--slb-line)] bg-white p-5 shadow-sm">
               <QRCodeSVG value={result.url} size={220} level="M" includeMargin />
             </div>
 
-            <div className="rounded-xl border border-gray-100 bg-white p-4">
-              <div className="mb-2 flex items-center gap-2 text-sm font-semibold text-gray-700">
+            <div className="rounded-3xl border border-[var(--slb-line)] bg-white/80 p-4 shadow-sm">
+              <div className="mb-2 flex items-center gap-2 text-sm font-semibold text-[var(--slb-ink)]">
                 <QrCode size={16} />
                 <span>{result.slug}</span>
               </div>
-              <p className="break-all text-sm text-gray-600">{result.url}</p>
+              <p className="break-all text-sm leading-relaxed text-[var(--slb-muted)]">{result.url}</p>
             </div>
 
             <div className="space-y-3">

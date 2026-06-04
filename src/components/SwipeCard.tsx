@@ -24,8 +24,8 @@ export const SwipeCard: React.FC<SwipeCardProps> = ({
   const rotate = useTransform(x, [-150, 0, 150], [-10, 0, 10]);
   
   // Opacity for choice indicators
-  const leftOpacity = useTransform(x, [0, -100], [0, 1]);
-  const rightOpacity = useTransform(x, [0, 100], [0, 1]);
+  const leftOpacity = useTransform(x, [-120, -45], [1, 0]);
+  const rightOpacity = useTransform(x, [45, 120], [0, 1]);
   
   // Optional: Background color shift based on swipe?
   // const bg = useTransform(x, [-150, 0, 150], ["rgb(255, 230, 230)", "rgb(255, 255, 255)", "rgb(230, 255, 230)"]);
@@ -115,44 +115,54 @@ export const SwipeCard: React.FC<SwipeCardProps> = ({
       onDrag={handleDrag}
       animate={controls}
       style={{ x, rotate }}
-      className="absolute w-full max-w-[320px] h-full bg-white rounded-2xl shadow-xl border border-gray-100 flex flex-col items-center justify-between p-6 cursor-grab active:cursor-grabbing touch-none select-none"
+      className="card-enter absolute h-full w-full max-w-[326px] cursor-grab select-none touch-none overflow-hidden rounded-[32px] border border-[var(--slb-line)] bg-[var(--slb-card)] p-5 shadow-[0_22px_60px_rgba(33,48,42,0.16)] active:cursor-grabbing"
     >
-      {/* Choice Indicators (Overlay) */}
       <motion.div 
         style={{ opacity: rightOpacity }} 
-        className="absolute top-8 left-8 border-4 border-indigo-500 text-indigo-600 rounded-lg px-4 py-2 font-bold text-2xl transform -rotate-12 z-20 pointer-events-none bg-white/90 backdrop-blur-sm"
+        className="pointer-events-none absolute left-5 top-8 z-20 max-w-[136px] -rotate-12 rounded-2xl border-[3px] border-[var(--slb-pine)] bg-white/90 px-3 py-2 text-center font-display text-sm font-black uppercase leading-tight text-[var(--slb-pine)] shadow-sm backdrop-blur-sm"
       >
         {card.rightChoice.text}
       </motion.div>
       <motion.div 
         style={{ opacity: leftOpacity }} 
-        className="absolute top-8 right-8 border-4 border-amber-500 text-amber-600 rounded-lg px-4 py-2 font-bold text-2xl transform rotate-12 z-20 pointer-events-none bg-white/90 backdrop-blur-sm"
+        className="pointer-events-none absolute right-5 top-8 z-20 max-w-[136px] rotate-12 rounded-2xl border-[3px] border-[var(--slb-orange)] bg-white/90 px-3 py-2 text-center font-display text-sm font-black uppercase leading-tight text-[var(--slb-orange)] shadow-sm backdrop-blur-sm"
       >
         {card.leftChoice.text}
       </motion.div>
 
-      {/* Card Content */}
-      <div className="w-full flex-1 flex flex-col items-center justify-center gap-6">
+      <div className="flex h-full w-full flex-col items-center justify-between gap-4 rounded-[24px] border border-[rgba(33,48,42,0.08)] bg-[linear-gradient(180deg,#fff_0%,#fbfaf6_100%)] p-4">
         {card.image && (
-            <div className={`w-full ${card.image.length < 5 ? 'h-32 flex items-center justify-center bg-indigo-50' : 'h-40 bg-gray-100'} rounded-xl mb-2 overflow-hidden`}>
+            <div className={`w-full ${card.image.length < 5 ? 'min-h-[132px] flex items-center justify-center bg-[#F0EEE4]' : 'h-[154px] bg-[#F0EEE4]'} overflow-hidden rounded-[24px] border border-[var(--slb-line)]`}>
                 {card.image.length < 5 ? (
-                    <span className="text-6xl">{card.image}</span>
+                    <span className="text-6xl leading-none">{card.image}</span>
                 ) : (
                     <img src={card.image} alt={imageAlt} className="w-full h-full object-cover" />
                 )}
             </div>
         )}
         
-        {/* If no image, maybe a placeholder icon or larger text */}
         {!card.image && (
-             <div className="w-full h-32 bg-indigo-50 rounded-xl flex items-center justify-center mb-2">
-                <span className="text-4xl">🤔</span>
+             <div className="flex min-h-[132px] w-full items-center justify-center rounded-[24px] border border-[var(--slb-line)] bg-[#F0EEE4]">
+                <span className="text-5xl leading-none">🤔</span>
              </div>
         )}
 
-        <h3 className="text-xl font-medium text-center text-gray-800 leading-relaxed">
+        <h3 className="flex flex-1 items-center px-1 text-center font-display text-[clamp(1.3rem,7vw,1.9rem)] font-black leading-[1.05] text-[var(--slb-ink)]">
           {card.description}
         </h3>
+
+        <div className="grid w-full grid-cols-2 gap-3">
+          <div className="min-h-[58px] rounded-2xl border border-[rgba(201,106,46,0.18)] bg-[#FFF4EA] px-3 py-2 text-center">
+            <p className="break-words font-display text-[11px] font-black uppercase leading-tight text-[var(--slb-orange)]">
+              {card.leftChoice.text}
+            </p>
+          </div>
+          <div className="min-h-[58px] rounded-2xl border border-[rgba(47,90,69,0.18)] bg-[#EEF5EF] px-3 py-2 text-center">
+            <p className="break-words font-display text-[11px] font-black uppercase leading-tight text-[var(--slb-pine)]">
+              {card.rightChoice.text}
+            </p>
+          </div>
+        </div>
       </div>
     </motion.div>
   );
