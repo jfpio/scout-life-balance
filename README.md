@@ -8,7 +8,9 @@ Inspired by the swipe-based decision game **Reigns**.
 
 **Play online (EN):** [https://scout-life-balance-en.web.app/](https://scout-life-balance-en.web.app/)
 
-**Instructor documentation:** open [`docs/index.html`](docs/index.html) or publish the `docs/` folder with GitHub Pages.
+**Instructor documentation:** [https://jfpio.github.io/scout-life-balance/gra.html](https://jfpio.github.io/scout-life-balance/gra.html)
+
+Local documentation files are in [`docs/`](docs/).
 
 Quick passwords for facilitators:
 * Custom game creator password: `instruktor`
