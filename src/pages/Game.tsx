@@ -96,7 +96,7 @@ const Game: React.FC<GameProps> = ({
       </div>
 
       <div className="relative flex flex-1 items-center justify-center px-5 pb-[148px] pt-2">
-         <div className="relative h-full min-h-[320px] w-full max-w-[326px] max-h-[520px]">
+         <div className="relative h-full min-h-[320px] w-full max-w-[300px] min-[390px]:max-w-[326px] max-h-[520px]">
             <div className="absolute inset-0 translate-y-4 rotate-[-3deg] rounded-[32px] border border-[var(--slb-line)] bg-white/55 shadow-sm" />
             <div className="absolute inset-0 translate-y-2 rotate-[3deg] rounded-[32px] border border-[var(--slb-line)] bg-white/80 shadow-sm" />
             
