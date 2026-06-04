@@ -89,7 +89,9 @@ We use a **-3 to 3** scale, where:
 
 The app can create a temporary custom game from a public Google Sheets template:
 
-1. Open the template spreadsheet: [Scout Life Balance Google Sheets template](https://docs.google.com/spreadsheets/d/126XIXQjlBxvgHlEcSVn-mTeAFt_jA_o-KYZcre94HiA/edit?usp=sharing).
+1. Open the template spreadsheet:
+   * [PL template](https://docs.google.com/spreadsheets/d/1HOdjQs9DVRU6BJK8fW6NjXFFlCd_DobqSSSkRBK-P80/edit?usp=sharing)
+   * [EN template](https://docs.google.com/spreadsheets/d/1xA7D_a3DXaPOpN9gzTvTHZUsZ4Km6JerFQtpn5vEAeU/edit?usp=sharing)
 2. Create your own copy and edit the `Cards` tab.
 3. Share the spreadsheet as **anyone with the link can view**.
 4. Open `/create`, unlock it with the simple creator password `instruktor`, and paste the spreadsheet link.

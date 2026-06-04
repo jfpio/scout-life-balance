@@ -57,12 +57,15 @@ const copy = {
   },
 };
 
-const TEMPLATE_SHEET_URL =
-  'https://docs.google.com/spreadsheets/d/126XIXQjlBxvgHlEcSVn-mTeAFt_jA_o-KYZcre94HiA/edit?usp=sharing';
+const templateSheetUrls = {
+  pl: 'https://docs.google.com/spreadsheets/d/1HOdjQs9DVRU6BJK8fW6NjXFFlCd_DobqSSSkRBK-P80/edit?usp=sharing',
+  en: 'https://docs.google.com/spreadsheets/d/1xA7D_a3DXaPOpN9gzTvTHZUsZ4Km6JerFQtpn5vEAeU/edit?usp=sharing',
+};
 
 const CreateCustomGame: React.FC = () => {
   const navigate = useNavigate();
   const text = copy[activeLocale];
+  const templateSheetUrl = templateSheetUrls[activeLocale];
   const [isUnlocked, setIsUnlocked] = React.useState(
     () => sessionStorage.getItem('custom-game-creator-unlocked') === 'true',
   );
@@ -163,7 +166,7 @@ const CreateCustomGame: React.FC = () => {
               <h2 className="font-display text-lg font-black text-[var(--slb-ink)]">{text.templateTitle}</h2>
               <p className="mt-1 text-sm leading-relaxed text-[var(--slb-muted)]">{text.templateText}</p>
               <a
-                href={TEMPLATE_SHEET_URL}
+                href={templateSheetUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-4 inline-flex min-h-11 items-center justify-center rounded-full bg-[#EEF5EF] px-5 font-display text-sm font-black text-[var(--slb-pine)] transition-colors hover:bg-[#E0EFE5]"
