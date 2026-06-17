@@ -360,8 +360,11 @@ const parseInteger = (value: string) => {
 };
 
 const normalizeHeader = (value: string) => {
-  const normalized = value.trim().toLowerCase();
-  const matchingColumn = REQUIRED_COLUMNS.find((column) => normalized === column || normalized.endsWith(` ${column}`));
+  const normalized = value.trim().toLowerCase().replace(/\s+/g, ' ');
+  const matchingColumn = REQUIRED_COLUMNS.find((column) => {
+    const columnPattern = new RegExp(`(^|\\s)${column}(\\s|$)`);
+    return columnPattern.test(normalized);
+  });
   return matchingColumn ?? normalized;
 };
 
