@@ -9,7 +9,9 @@ import { createCustomGame, CustomGameApiError, type CreateCustomGameResult } fro
 const copy = {
   pl: {
     title: 'Własna wersja gry',
-    subtitle: 'Wklej publiczny link do Google Sheets z szablonem kart.',
+    subtitle: 'Wybierz gotowy zestaw pytań albo wklej własny arkusz Google Sheets.',
+    modeTitle: 'Wybierz zestaw pytań',
+    modeText: 'Gotowe wersje tworzą grę jednym kliknięciem. Własne pytania wymagają publicznego arkusza Google Sheets.',
     sheetLabel: 'Link do Google Sheets',
     sheetPlaceholder: 'https://docs.google.com/spreadsheets/d/...',
     passwordTitle: 'Dostęp dla instruktorów',
@@ -21,6 +23,9 @@ const copy = {
     templateTitle: 'Szablon arkusza',
     templateText: 'Skopiuj szablon do swojego Google Drive, uzupełnij aktywne karty i udostępnij arkusz jako „każdy z linkiem może wyświetlać”.',
     templateOpen: 'Otwórz szablon',
+    previewQuestions: 'Podejrzyj pytania',
+    createPreset: 'Utwórz grę z tego zestawu',
+    presetUnavailable: 'Link do Google Sheets zostanie dodany po wrzuceniu arkusza.',
     submit: 'Utwórz grę',
     creating: 'Tworzę grę...',
     back: 'Wróć',
@@ -33,7 +38,9 @@ const copy = {
   },
   en: {
     title: 'Custom game',
-    subtitle: 'Paste a public Google Sheets link that uses the card template.',
+    subtitle: 'Choose a ready question set or paste your own Google Sheets link.',
+    modeTitle: 'Choose question set',
+    modeText: 'Ready sets create a game in one click. Custom questions require a public Google Sheets file.',
     sheetLabel: 'Google Sheets link',
     sheetPlaceholder: 'https://docs.google.com/spreadsheets/d/...',
     passwordTitle: 'Leader access',
@@ -45,6 +52,9 @@ const copy = {
     templateTitle: 'Spreadsheet template',
     templateText: 'Copy the template to your Google Drive, fill in the active cards, and share it as anyone with the link can view.',
     templateOpen: 'Open template',
+    previewQuestions: 'Preview questions',
+    createPreset: 'Create game from this set',
+    presetUnavailable: 'The Google Sheets link will be added after the spreadsheet is uploaded.',
     submit: 'Create game',
     creating: 'Creating game...',
     back: 'Back',
@@ -62,34 +72,104 @@ const templateSheetUrls = {
   en: 'https://docs.google.com/spreadsheets/d/1xA7D_a3DXaPOpN9gzTvTHZUsZ4Km6JerFQtpn5vEAeU/edit?usp=sharing',
 };
 
+const presetSheetUrls = {
+  pl: {
+    harcerze:
+      'https://docs.google.com/spreadsheets/d/1aI7WEgOZ0dnfR3WPvrVtAvLyVwikq63_/edit?usp=sharing&ouid=111660113462133971852&rtpof=true&sd=true',
+    harcerki:
+      'https://docs.google.com/spreadsheets/d/1dM7HSjjbkL3jkGLCx7ckOhlwDQmlOKAx/edit?usp=sharing&ouid=111660113462133971852&rtpof=true&sd=true',
+  },
+  en: {
+    harcerze:
+      'https://docs.google.com/spreadsheets/d/1aI7WEgOZ0dnfR3WPvrVtAvLyVwikq63_/edit?usp=sharing&ouid=111660113462133971852&rtpof=true&sd=true',
+    harcerki:
+      'https://docs.google.com/spreadsheets/d/1dM7HSjjbkL3jkGLCx7ckOhlwDQmlOKAx/edit?usp=sharing&ouid=111660113462133971852&rtpof=true&sd=true',
+  },
+};
+
+type QuestionSetId = 'harcerze' | 'harcerki' | 'custom';
+
+const questionSetOptions = {
+  pl: [
+    {
+      id: 'harcerze',
+      label: 'Wersja dla harcerzy',
+      description: 'Gotowy zestaw pytań dostosowany językowo do kursów męskich.',
+    },
+    {
+      id: 'harcerki',
+      label: 'Wersja dla harcerek',
+      description: 'Gotowy zestaw pytań dostosowany językowo do kursów żeńskich.',
+    },
+    {
+      id: 'custom',
+      label: 'Własne pytania',
+      description: 'Skopiuj szablon, wpisz swoje karty i wklej publiczny link do arkusza.',
+    },
+  ],
+  en: [
+    {
+      id: 'harcerze',
+      label: 'Scouts version',
+      description: 'Ready Polish-language question set for boys courses.',
+    },
+    {
+      id: 'harcerki',
+      label: 'Girl scouts version',
+      description: 'Ready Polish-language question set for girls courses.',
+    },
+    {
+      id: 'custom',
+      label: 'Custom questions',
+      description: 'Copy the template, write your cards, and paste a public spreadsheet link.',
+    },
+  ],
+} satisfies Record<typeof activeLocale, Array<{ id: QuestionSetId; label: string; description: string }>>;
+
 const CreateCustomGame: React.FC = () => {
   const navigate = useNavigate();
   const text = copy[activeLocale];
   const templateSheetUrl = templateSheetUrls[activeLocale];
+  const questionSets = questionSetOptions[activeLocale];
   const [isUnlocked, setIsUnlocked] = React.useState(
     () => sessionStorage.getItem('custom-game-creator-unlocked') === 'true',
   );
   const [creatorPassword, setCreatorPassword] = React.useState('');
   const [passwordError, setPasswordError] = React.useState('');
+  const [selectedQuestionSet, setSelectedQuestionSet] = React.useState<QuestionSetId>('harcerze');
   const [sheetUrl, setSheetUrl] = React.useState('');
-  const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const [submittingQuestionSet, setSubmittingQuestionSet] = React.useState<QuestionSetId | null>(null);
   const [result, setResult] = React.useState<CreateCustomGameResult | null>(null);
   const [error, setError] = React.useState<CustomGameApiError | Error | null>(null);
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setIsSubmitting(true);
+  const getQuestionSetSheetUrl = (id: QuestionSetId) => {
+    if (id === 'custom') return sheetUrl;
+    return presetSheetUrls[activeLocale][id];
+  };
+
+  const getQuestionSetPreviewUrl = (id: QuestionSetId) => {
+    if (id === 'custom') return templateSheetUrl;
+    return presetSheetUrls[activeLocale][id];
+  };
+
+  const createGameFromSheet = async (url: string, questionSetId: QuestionSetId) => {
+    setSubmittingQuestionSet(questionSetId);
     setResult(null);
     setError(null);
 
     try {
-      const createdGame = await createCustomGame(sheetUrl);
+      const createdGame = await createCustomGame(url);
       setResult(createdGame);
     } catch (caughtError) {
       setError(caughtError instanceof Error ? caughtError : new Error(text.configError));
     } finally {
-      setIsSubmitting(false);
+      setSubmittingQuestionSet(null);
     }
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    await createGameFromSheet(sheetUrl, 'custom');
   };
 
   const handleUnlock = (event: React.FormEvent<HTMLFormElement>) => {
@@ -161,31 +241,104 @@ const CreateCustomGame: React.FC = () => {
         )}
 
         {isUnlocked && !result && (
-          <form onSubmit={handleSubmit} className="space-y-5">
+          <div className="space-y-5">
             <div className="rounded-3xl border border-[var(--slb-line)] bg-white/80 p-5 shadow-sm">
-              <h2 className="font-display text-lg font-black text-[var(--slb-ink)]">{text.templateTitle}</h2>
-              <p className="mt-1 text-sm leading-relaxed text-[var(--slb-muted)]">{text.templateText}</p>
-              <a
-                href={templateSheetUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-4 inline-flex min-h-11 items-center justify-center rounded-full bg-[#EEF5EF] px-5 font-display text-sm font-black text-[var(--slb-pine)] transition-colors hover:bg-[#E0EFE5]"
-              >
-                {text.templateOpen}
-              </a>
+              <h2 className="font-display text-lg font-black text-[var(--slb-ink)]">{text.modeTitle}</h2>
+              <p className="mt-1 text-sm leading-relaxed text-[var(--slb-muted)]">{text.modeText}</p>
             </div>
 
-            <label className="block space-y-2">
-              <span className="font-display text-xs font-black uppercase tracking-[0.12em] text-[var(--slb-muted)]">{text.sheetLabel}</span>
-              <input
-                value={sheetUrl}
-                onChange={(event) => setSheetUrl(event.target.value)}
-                placeholder={text.sheetPlaceholder}
-                type="url"
-                required
-                className="w-full rounded-full border border-[var(--slb-line)] bg-white px-4 py-3 text-sm text-[var(--slb-ink)] outline-none transition-all placeholder:text-[var(--slb-muted)] focus:border-[var(--slb-pine)] focus:ring-2 focus:ring-[rgba(47,90,69,0.14)]"
-              />
-            </label>
+            <div className="grid gap-3">
+              {questionSets.map((option) => {
+                const isSelected = selectedQuestionSet === option.id;
+                const previewUrl = getQuestionSetPreviewUrl(option.id);
+
+                return (
+                  <div
+                    key={option.id}
+                    className={`rounded-3xl border p-4 text-left shadow-sm transition-all ${
+                      isSelected
+                        ? 'border-[var(--slb-pine)] bg-[#EEF5EF]'
+                        : 'border-[var(--slb-line)] bg-white/80 hover:bg-white'
+                    }`}
+                  >
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSelectedQuestionSet(option.id);
+                        setError(null);
+                      }}
+                      className="w-full text-left"
+                    >
+                      <span className="block font-display text-base font-black text-[var(--slb-ink)]">{option.label}</span>
+                      <span className="mt-1 block text-sm leading-relaxed text-[var(--slb-muted)]">{option.description}</span>
+                    </button>
+                    {previewUrl ? (
+                      <a
+                        href={previewUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-3 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 font-display text-xs font-black text-[var(--slb-pine)] shadow-sm transition-colors hover:bg-[#FBFAF6]"
+                      >
+                        <ExternalLink size={14} />
+                        <span>{text.previewQuestions}</span>
+                      </a>
+                    ) : (
+                      <span className="mt-3 block text-xs font-semibold text-[var(--slb-orange)]">{text.presetUnavailable}</span>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+
+            {selectedQuestionSet !== 'custom' && (
+              <Button
+                fullWidth
+                type="button"
+                disabled={!getQuestionSetSheetUrl(selectedQuestionSet) || submittingQuestionSet !== null}
+                onClick={() => createGameFromSheet(getQuestionSetSheetUrl(selectedQuestionSet), selectedQuestionSet)}
+              >
+                <span className="flex items-center justify-center gap-2">
+                  {submittingQuestionSet === selectedQuestionSet && <Loader2 size={18} className="animate-spin" />}
+                  {submittingQuestionSet === selectedQuestionSet ? text.creating : text.createPreset}
+                </span>
+              </Button>
+            )}
+
+            {selectedQuestionSet === 'custom' && (
+              <form onSubmit={handleSubmit} className="space-y-5">
+                <div className="rounded-3xl border border-[var(--slb-line)] bg-white/80 p-5 shadow-sm">
+                  <h2 className="font-display text-lg font-black text-[var(--slb-ink)]">{text.templateTitle}</h2>
+                  <p className="mt-1 text-sm leading-relaxed text-[var(--slb-muted)]">{text.templateText}</p>
+                  <a
+                    href={templateSheetUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-4 inline-flex min-h-11 items-center justify-center rounded-full bg-[#EEF5EF] px-5 font-display text-sm font-black text-[var(--slb-pine)] transition-colors hover:bg-[#E0EFE5]"
+                  >
+                    {text.templateOpen}
+                  </a>
+                </div>
+
+                <label className="block space-y-2">
+                  <span className="font-display text-xs font-black uppercase tracking-[0.12em] text-[var(--slb-muted)]">{text.sheetLabel}</span>
+                  <input
+                    value={sheetUrl}
+                    onChange={(event) => setSheetUrl(event.target.value)}
+                    placeholder={text.sheetPlaceholder}
+                    type="url"
+                    required
+                    className="w-full rounded-full border border-[var(--slb-line)] bg-white px-4 py-3 text-sm text-[var(--slb-ink)] outline-none transition-all placeholder:text-[var(--slb-muted)] focus:border-[var(--slb-pine)] focus:ring-2 focus:ring-[rgba(47,90,69,0.14)]"
+                  />
+                </label>
+
+                <Button fullWidth type="submit" disabled={submittingQuestionSet !== null}>
+                  <span className="flex items-center justify-center gap-2">
+                    {submittingQuestionSet === 'custom' && <Loader2 size={18} className="animate-spin" />}
+                    {submittingQuestionSet === 'custom' ? text.creating : text.submit}
+                  </span>
+                </Button>
+              </form>
+            )}
 
             {error && (
               <div className="rounded-2xl border border-[rgba(201,106,46,0.22)] bg-[#FFF4EA] p-4 text-sm text-[var(--slb-orange)]">
@@ -206,14 +359,7 @@ const CreateCustomGame: React.FC = () => {
                 )}
               </div>
             )}
-
-            <Button fullWidth type="submit" disabled={isSubmitting}>
-              <span className="flex items-center justify-center gap-2">
-                {isSubmitting && <Loader2 size={18} className="animate-spin" />}
-                {isSubmitting ? text.creating : text.submit}
-              </span>
-            </Button>
-          </form>
+          </div>
         )}
 
         {result && (

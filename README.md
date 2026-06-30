@@ -22,6 +22,10 @@ The most important file for you is:
 
 👉 **`src/data/cards.json`** - **POLISH CARDS ARE HERE!**
 
+👉 **`src/data/cards.harcerze.json`** - **POLISH BOYS COURSE CARDS ARE HERE!**
+
+👉 **`src/data/cards.harcerki.json`** - **POLISH GIRLS COURSE CARDS ARE HERE!**
+
 👉 **`src/data/cards.en.json`** - **ENGLISH CARDS ARE HERE!**
 
 All situations, dilemmas, and their consequences are defined in these files. You can edit them to change the game content.
@@ -89,15 +93,19 @@ We use a **-3 to 3** scale, where:
 
 ## 🧩 Custom Google Sheets games
 
-The app can create a temporary custom game from a public Google Sheets template:
+The app can create a temporary custom game from either a ready question set or a public Google Sheets template:
 
-1. Open the template spreadsheet:
+1. Choose one of the ready course variants or open the template spreadsheet:
+   * [Boys course sheet](https://docs.google.com/spreadsheets/d/1aI7WEgOZ0dnfR3WPvrVtAvLyVwikq63_/edit?usp=sharing&ouid=111660113462133971852&rtpof=true&sd=true)
+   * [Girls course sheet](https://docs.google.com/spreadsheets/d/1dM7HSjjbkL3jkGLCx7ckOhlwDQmlOKAx/edit?usp=sharing&ouid=111660113462133971852&rtpof=true&sd=true)
    * [PL template](https://docs.google.com/spreadsheets/d/1HOdjQs9DVRU6BJK8fW6NjXFFlCd_DobqSSSkRBK-P80/edit?usp=sharing)
    * [EN template](https://docs.google.com/spreadsheets/d/1xA7D_a3DXaPOpN9gzTvTHZUsZ4Km6JerFQtpn5vEAeU/edit?usp=sharing)
-2. Create your own copy and edit the `Cards` tab.
-3. Share the spreadsheet as **anyone with the link can view**.
-4. Open `/create`, unlock it with the simple creator password `instruktor`, and paste the spreadsheet link.
+2. Open `/create`, unlock it with the simple creator password `instruktor`, choose a ready variant or paste a custom spreadsheet link.
+3. For custom questions, create your own copy of the template and edit the `Cards` tab.
+4. Share the custom spreadsheet as **anyone with the link can view**.
 5. Share the generated `/custom/<slug>` link or QR code.
+
+The default `/game` route asks the player to choose **Wersja dla harcerzy** or **Wersja dla harcerek**. These built-in decks are static JSON snapshots, so updating the public sheets requires regenerating the JSON files and deploying again.
 
 Custom games are stored in Firestore with a 14-day expiration. This Spark-compatible version does not use Cloud Functions, Secret Manager, Cloud Build, or Artifact Registry. The creator password is a lightweight client-side gate, not a secure backend secret.
 
