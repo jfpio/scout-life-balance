@@ -4,7 +4,7 @@ A game about finding life balance, created for scouts (and not only). Make decis
 
 Inspired by the swipe-based decision game **Reigns**.
 
-**Play online (PL):** [https://scout-life-balance.web.app/](https://scout-life-balance.web.app/)
+**Play online (PL):** [https://harcbalans.web.app/](https://harcbalans.web.app/)
 
 **Play online (EN):** [https://scout-life-balance-en.web.app/](https://scout-life-balance-en.web.app/)
 
